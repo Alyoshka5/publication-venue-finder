@@ -1,4 +1,4 @@
-# Publication Venu Finder
+# Publication Venue Finder
 
 ## How To Run
 
