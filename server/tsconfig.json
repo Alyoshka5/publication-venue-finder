@@ -1,8 +1,11 @@
 {
     "compilerOptions": {
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "allowImportingTsExtensions": true,
+        "noEmit": true
     },
     "ts-node": {
-        "esm": true
+        "esm": true,
+        "experimentalSpecifierResolution": "node"
     }
 }
