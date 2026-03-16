@@ -353,7 +353,7 @@ CREATE TABLE VENUE_INSTANCE (
   `City` varchar(255) NOT NULL,
   `Country` varchar(255) NOT NULL,
   `SubmissionDeadline` DATE,
-  `CFP_URL` varchar(255) NOT NULL,
+  `CFP_URL` varchar(255) NULL,
   `CallForPapers` TEXT,
   `Reviewing` BOOLEAN,
   `Published` BOOLEAN,
@@ -801,7 +801,7 @@ INSERT INTO `COLLECTION` (`CollectionID`, `CreatorUserID`, `Name`, `Visibility`,
 CREATE TABLE REQUEST (
   `RequestID` int(8) NOT NULL,
   `SubmittedByUserID` int(8) NOT NULL,
-  `ReviewedByUserID` int(8) NOT NULL,
+  `ReviewedByUserID` int(8),
   `CreatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `PayloadJSON` JSON,
   `Status` varchar(50),
@@ -970,7 +970,7 @@ CREATE TABLE VIEWS (
   `UserID` int(8) NOT NULL,
   `SeriesID` int(8) NOT NULL,
   `Year` int(8) NOT NULL,
-  `ViewedTimestamp` TIMESTAMP,
+  `ViewedTimestamp` TIMESTAMP NOT NULL,
   `DurationSec` int(8) NOT NULL,
   PRIMARY KEY (UserID, SeriesID, Year, ViewedTimestamp),
   FOREIGN KEY (UserID) REFERENCES RESEARCHER(UserID),
@@ -1121,7 +1121,7 @@ CREATE TABLE CLICKS_EXT_LINK (
   `UserID` int(8) NOT NULL,
   `SeriesID` int(8) NOT NULL,
   `Year` int(8) NOT NULL,
-  `ClickedTimestamp` TIMESTAMP,
+  `ClickedTimestamp` TIMESTAMP NOT NULL,
   `LinkType` varchar(100) NOT NULL,
   PRIMARY KEY (UserID, SeriesID, Year, ClickedTimestamp),
   FOREIGN KEY (UserID) REFERENCES RESEARCHER(UserID),
@@ -1173,8 +1173,8 @@ INSERT INTO `CLICKS_EXT_LINK` (`UserID`, `SeriesID`, `Year`, `ClickedTimestamp`,
 CREATE TABLE INTERACTS_WITH (
   `UserID` int(8) NOT NULL,
   `TopicID` int(8) NOT NULL,
-  `clickedTimestamp` TIMESTAMP,
-  PRIMARY KEY (UserID, TopicID, clickedTimestamp),
+  `ClickedTimestamp` TIMESTAMP NOT NULL,
+  PRIMARY KEY (UserID, TopicID, ClickedTimestamp),
   FOREIGN KEY (UserID) REFERENCES RESEARCHER(UserID),
   FOREIGN KEY (TopicID) REFERENCES TOPIC(TopicID)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1183,7 +1183,7 @@ CREATE TABLE INTERACTS_WITH (
 -- Dumping data for table `INTERACTS_WITH`
 --
 
-INSERT INTO `INTERACTS_WITH` (`UserID`, `TopicID`, `clickedTimestamp`) VALUES
+INSERT INTO `INTERACTS_WITH` (`UserID`, `TopicID`, `ClickedTimestamp`) VALUES
 -- Alice_ML: ML, Deep Learning, RL
 (1, 1, '2024-09-01 10:00:00'),
 (1, 2, '2024-09-01 10:05:00'),
@@ -1549,9 +1549,9 @@ INSERT INTO `INSTANCE_TAGGED_WITH` (`SeriesID`, `Year`, `TopicID`) VALUES
 --
 
 CREATE TABLE COLLECTION_CONTAINS (
-  `CollectionID` INT,
-  `SeriesID` INT,
-  `Year` INT,
+  `CollectionID` int(8) NOT NULL,
+  `SeriesID` int(8) NOT NULL,
+  `Year` int(8) NOT NULL,
   PRIMARY KEY (CollectionID, SeriesID, Year),
   FOREIGN KEY (CollectionID) REFERENCES COLLECTION(CollectionID),
   FOREIGN KEY (SeriesID, Year) REFERENCES VENUE_INSTANCE(SeriesID, Year)
