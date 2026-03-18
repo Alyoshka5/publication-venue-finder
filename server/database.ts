@@ -7,3 +7,5 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: 'publication_venue_finder_db'
 }).promise();
+
+export default pool;

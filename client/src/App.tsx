@@ -1,130 +1,173 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 
+type UpcomingVenue = {
+  seriesId: number
+  acronym: string | null
+  year: number
+  title: string
+  city: string
+  country: string
+  submissionDeadline: string | null
+  organization: string
+}
+
+const formatDate = (value: string | null) => {
+  if (!value) return '—'
+  const d = new Date(value)
+  if (Number.isNaN(d.getTime())) return value
+  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' })
+}
+
+const formatLocation = (city: string, country: string) => {
+  if (!city && !country) return '—'
+  if (!city) return country
+  if (!country) return city
+  return `${city}, ${country}`
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [venues, setVenues] = useState<UpcomingVenue[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
-    const getServerResponse = async () => {
-      const res = await fetch('http://localhost:3000/');
-      const data = await res.json();
-      console.log(data);
+    const controller = new AbortController()
+
+    const run = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        const res = await fetch('/api/venues/upcoming', { signal: controller.signal })
+        if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
+        const data = (await res.json()) as UpcomingVenue[]
+        setVenues(Array.isArray(data) ? data : [])
+      } catch (e) {
+        if (e instanceof DOMException && e.name === 'AbortError') return
+        setError(e instanceof Error ? e.message : String(e))
+      } finally {
+        setLoading(false)
+      }
     }
 
-    getServerResponse();
-  }, []);
+    run()
+    return () => controller.abort()
+  }, [])
+
+  const filteredVenues = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    if (!q) return venues
+    return venues.filter((v) => {
+      return (
+        (v.acronym ?? '').toLowerCase().includes(q) ||
+        v.title.toLowerCase().includes(q) ||
+        v.organization.toLowerCase().includes(q) ||
+        formatLocation(v.city, v.country).toLowerCase().includes(q) ||
+        String(v.year).includes(q)
+      )
+    })
+  }, [query, venues])
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="page">
+      <header className="header">
+        <div className="brand">
+          <div className="mark" aria-hidden="true">
+            PVF
+          </div>
+          <div className="brandText">
+            <h1>Publication Venue Finder</h1>
+            <p className="subtitle">Upcoming venues (from MySQL via Express)</p>
+          </div>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
+        <div className="headerRight">
+          <label className="search">
+            <span className="srOnly">Search</span>
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search acronym, title, org, location, year…"
+            />
+          </label>
         </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="main">
+        <section className="card">
+          <div className="cardHeader">
+            <h2>Upcoming</h2>
+            <div className="meta">
+              {loading
+                ? 'Loading…'
+                : `${filteredVenues.length} result${filteredVenues.length === 1 ? '' : 's'}`}
+            </div>
+          </div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          {error ? (
+            <div className="error">
+              <div className="errorTitle">Backend query failed</div>
+              <div className="errorBody">{error}</div>
+              <div className="errorHint">
+                Make sure the server is running on <code>localhost:3000</code> and the database is seeded.
+              </div>
+            </div>
+          ) : (
+            <div className="tableWrap" role="region" aria-label="Upcoming venues table" tabIndex={0}>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Venue</th>
+                    <th>Org</th>
+                    <th>Year</th>
+                    <th>Location</th>
+                    <th>Deadline</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loading ? (
+                    <tr>
+                      <td colSpan={5} className="tableEmpty">
+                        Loading upcoming venues…
+                      </td>
+                    </tr>
+                  ) : filteredVenues.length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="tableEmpty">
+                        No results.
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredVenues.map((v) => (
+                      <tr key={`${v.seriesId}-${v.year}`}>
+                        <td>
+                          <div className="venueCell">
+                            <div className="venueTop">
+                              <span className="pill">{v.acronym ?? '—'}</span>
+                              <span className="venueTitle">{v.title}</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="muted">{v.organization}</td>
+                        <td className="mono">{v.year}</td>
+                        <td className="muted">{formatLocation(v.city, v.country)}</td>
+                        <td className="mono">{formatDate(v.submissionDeadline)}</td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <footer className="footer">
+          <span className="muted">
+            Query: <code>WHERE Reviewing = FALSE AND Published = FALSE</code> (limited to 50 rows)
+          </span>
+        </footer>
+      </main>
+    </div>
   )
 }
 
