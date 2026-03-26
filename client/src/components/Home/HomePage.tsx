@@ -1,5 +1,5 @@
-import VenueListHeader from './VenueListHeader'
-import VenueList from './VenueList'
+import VenueListHeader from './VenueListHeader';
+import VenueList from './VenueList';
 import { useState } from 'react'
 
 
