@@ -1,0 +1,17 @@
+.venueCell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.venueTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.venueTitle {
+  color: var(--text-h);
+  font-weight: 500;
+}
