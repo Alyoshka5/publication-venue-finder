@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { UpcomingVenue } from '../models/venues';
+import type { UpcomingVenue } from '../../models/venues';
 import style from './VenueList.module.css';
 
 const formatDate = (value: string | null) => {
