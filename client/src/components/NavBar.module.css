@@ -1,0 +1,87 @@
+.sideNav {
+  width: 220px;
+  height: 100vh;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 1024px) {
+    position: static;
+    height: auto;
+    width: 100%;
+  }
+}
+
+.navContent {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  flex-shrink: 0;
+  width: 100%;
+  height: 80%;
+  
+  background: color-mix(in srgb, var(--surface) 65%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-2);
+  
+  @media (max-width: 1024px) {
+    width: 100%;
+    height: fit-content;
+    
+    flex-direction: row;
+    overflow-x: auto;
+  }
+}
+
+.navSection {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+  width: 100%;
+
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    width: auto;
+  }
+}
+
+.navItem {
+  all: unset;
+  box-sizing: border-box;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  text-align: left;
+  
+  @media (max-width: 1024px) {
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+
+.navItem:hover {
+  color: var(--text-h);
+  background: color-mix(in srgb, var(--accent-bg) 28%, transparent);
+}
+
+.navItem.active {
+  color: var(--text-h);
+  background: var(--surface);
+  border-color: rgba(124, 58, 237, 0.25);
+  box-shadow: var(--shadow);
+}
