@@ -1,20 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { UpcomingVenue } from '../../models/venues';
 import style from './VenueList.module.css';
-
-const formatDate = (value: string | null) => {
-  if (!value) return '—'
-  const d = new Date(value)
-  if (Number.isNaN(d.getTime())) return value
-  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' })
-}
-
-const formatLocation = (city: string, country: string) => {
-  if (!city && !country) return '—'
-  if (!city) return country
-  if (!country) return city
-  return `${city}, ${country}`
-}
+import { formatDate, formatLocation } from '../../helpers/formatting';
 
 export default function VenueList({ query }: { query: string }) {
   const [venues, setVenues] = useState<UpcomingVenue[]>([])

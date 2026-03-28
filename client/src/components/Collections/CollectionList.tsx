@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react';
 import style from './CollectionList.module.css';
 import type { Collection } from '../../models/collections';
-
-const formatDate = (value: string | null) => {
-  if (!value) return '—'
-  const d = new Date(value)
-  if (Number.isNaN(d.getTime())) return value
-  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' })
-}
+import { formatDate } from '../../helpers/formatting';
 
 export default function CollectionList() {
   const [collections, setCollections] = useState<Collection[]>([])
