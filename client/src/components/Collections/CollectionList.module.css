@@ -1,0 +1,29 @@
+.contentContainer {
+    margin-top: 75px;
+
+    @media (max-width: 1024px) {
+        margin-top: 15px;
+    }
+}
+
+.collectionRow:hover {
+    cursor: pointer;
+}
+
+.collectionCell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.collectionTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.collectionTitle {
+  color: var(--text-h);
+  font-weight: 500;
+}

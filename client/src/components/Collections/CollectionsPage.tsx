@@ -1,7 +1,10 @@
+import CollectionList from "./CollectionList";
 
 
 export default function CollectionsPage() {
     return (
-        <h1>Collections Page</h1>
+        <div className="page">
+            <CollectionList />
+        </div>
     )
 }
