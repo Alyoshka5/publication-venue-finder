@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import style from './NavBar.module.css';
 
 export default function NavBar() {
-    const [activeTab, setActiveTab] = useState<string>('home');
+    const location = useLocation();
+    const urlPath = location.pathname.slice(1);
+    const [activeTab, setActiveTab] = useState<string>(urlPath === '' ? 'home' : urlPath);
 
     return (
       <aside className={style.sideNav} aria-label="Main navigation">
