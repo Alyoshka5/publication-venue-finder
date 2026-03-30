@@ -1,6 +1,21 @@
 import style from './VenueListHeader.module.css';
+import type { TopicOption } from '../../models/venues';
 
-export default function VenueListHeader({ query, setQuery }: { query: string, setQuery: React.Dispatch<React.SetStateAction<string>> }) {
+type VenueListHeaderProps = {
+  query: string
+  setQuery: React.Dispatch<React.SetStateAction<string>>
+  topics: TopicOption[]
+  selectedTopicId: string
+  setSelectedTopicId: React.Dispatch<React.SetStateAction<string>>
+}
+
+export default function VenueListHeader({
+  query,
+  setQuery,
+  topics,
+  selectedTopicId,
+  setSelectedTopicId
+}: VenueListHeaderProps) {
     return (
         <header className={style.header}>
         <div className={style.brand}>
@@ -20,6 +35,20 @@ export default function VenueListHeader({ query, setQuery }: { query: string, se
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search acronym, title, org, location, year…"
             />
+          </label>
+          <label className={style.filter}>
+            <span className={style.srOnly}>Topic</span>
+            <select
+              value={selectedTopicId}
+              onChange={(e) => setSelectedTopicId(e.target.value)}
+            >
+              <option value="">All topics</option>
+              {topics.map((topic) => (
+                <option key={topic.topicId} value={String(topic.topicId)}>
+                  {topic.name}
+                </option>
+              ))}
+            </select>
           </label>
         </div>
       </header>

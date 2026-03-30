@@ -1,36 +1,34 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import style from './NavBar.module.css';
 
 export default function NavBar() {
-    const [activeTab, setActiveTab] = useState<string>('home');
-
     return (
       <aside className={style.sideNav} aria-label="Main navigation">
         <div className={style.navContent}>
           <section className={style.navSection}>
-            <Link 
+            <NavLink
               to='/'
-              className={`${style.navItem} ${activeTab === 'home' ? style.active : ''}`}
-              onClick={() => setActiveTab('home')}
-            >Find Venues</Link>
-            <Link 
+              end
+              className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
+            >Find Venues</NavLink>
+            <NavLink
+              to='/admin'
+              className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
+            >Admin Dashboard</NavLink>
+            <NavLink
               to='/collections'
-              className={`${style.navItem} ${activeTab === 'collections' ? style.active : ''}`}
-              onClick={() => setActiveTab('collections')}
-            >My Collections</Link>
-            <Link 
+              className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
+            >My Collections</NavLink>
+            <NavLink
               to='/profile'
-              className={`${style.navItem} ${activeTab === 'profile' ? style.active : ''}`}
-              onClick={() => setActiveTab('profile')}
-            >Profile</Link>
+              className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
+            >Profile</NavLink>
           </section>
           <section className={style.navSection}>
-            <Link 
+            <NavLink
               to='/logout'
-              className={`${style.navItem} ${activeTab === 'logout' ? style.active : ''}`}
-              onClick={() => setActiveTab('logout')}
-            >Log Out</Link>
+              className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
+            >Log Out</NavLink>
           </section>
         </div>
       </aside>

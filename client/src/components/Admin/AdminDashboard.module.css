@@ -1,0 +1,76 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 32px 20px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-2);
+}
+
+.headerContent {
+  text-align: left;
+  width: 100%;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.title {
+  margin: 8px 0 10px;
+  font-size: 30px;
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  max-width: 760px;
+  color: var(--text);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statCard {
+  padding: 22px 24px;
+}
+
+.statLabel {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+
+.statValue {
+  margin-top: 14px;
+  color: var(--text-h);
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-family: var(--mono);
+}
+
+.statNote {
+  margin-top: 14px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.organizationCell {
+  color: var(--text-h);
+  font-weight: 500;
+}

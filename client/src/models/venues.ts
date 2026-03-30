@@ -7,6 +7,12 @@ type UpcomingVenue = {
   country: string
   submissionDeadline: string | null
   organization: string
+  topics: string | null
 }
 
-export type { UpcomingVenue }
+type TopicOption = {
+  topicId: number
+  name: string
+}
+
+export type { UpcomingVenue, TopicOption }
