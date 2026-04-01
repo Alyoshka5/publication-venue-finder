@@ -1,9 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Venue } from '../../models/venues';
 import style from './VenueList.module.css';
-import { formatDate, formatLocation } from '../../helpers/formatting';
+import { formatDate, formatLocation, formatTopics } from '../../helpers/formatting';
 
-export default function VenueList({ query }: { query: string }) {
+export default function VenueList({
+  query,
+  selectedTopicId
+}: {
+  query: string
+  selectedTopicId: string
+}) {
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -15,7 +21,10 @@ export default function VenueList({ query }: { query: string }) {
       try {
         setLoading(true)
         setError(null)
-        const res = await fetch('/api/venues/upcoming', { signal: controller.signal })
+        const params = new URLSearchParams()
+        if (selectedTopicId) params.set('topicId', selectedTopicId)
+        const suffix = params.toString()
+        const res = await fetch(`/api/venues/upcoming${suffix ? `?${suffix}` : ''}`, { signal: controller.signal })
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
         const data = (await res.json()) as Venue[]
         setVenues(Array.isArray(data) ? data : [])
@@ -29,7 +38,7 @@ export default function VenueList({ query }: { query: string }) {
 
     run()
     return () => controller.abort()
-  }, [])
+  }, [selectedTopicId])
 
   const filteredVenues = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -40,6 +49,7 @@ export default function VenueList({ query }: { query: string }) {
         v.title.toLowerCase().includes(q) ||
         v.organization.toLowerCase().includes(q) ||
         formatLocation(v.city, v.country).toLowerCase().includes(q) ||
+        (v.topics ?? '').toLowerCase().includes(q) ||
         String(v.year).includes(q)
       )
     })
@@ -72,6 +82,7 @@ export default function VenueList({ query }: { query: string }) {
                 <tr>
                   <th>Venue</th>
                   <th>Org</th>
+                  <th>Topics</th>
                   <th>Year</th>
                   <th>Location</th>
                   <th>Deadline</th>
@@ -80,28 +91,41 @@ export default function VenueList({ query }: { query: string }) {
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={5} className="tableEmpty">
+                    <td colSpan={6} className="tableEmpty">
                       Loading upcoming venues…
                     </td>
                   </tr>
                 ) : filteredVenues.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="tableEmpty">
+                    <td colSpan={6} className="tableEmpty">
                       No results.
                     </td>
                   </tr>
                 ) : (
                   filteredVenues.map((v) => (
                     <tr key={`${v.seriesId}-${v.year}`}>
-                      <td>
+                      <td className={style.venueColumn}>
                         <div className={style.venueCell}>
-                          <div className={style.venueTop}>
+                          <span className={style.venueTag}>
                             <span className="pill">{v.acronym ?? '—'}</span>
-                            <span className={style.venueTitle}>{v.title}</span>
-                          </div>
+                          </span>
+                          <span className={style.venueTitle}>{v.title}</span>
                         </div>
                       </td>
                       <td className="muted">{v.organization}</td>
+                      <td>
+                        <div className={style.topicList}>
+                          {formatTopics(v.topics).length > 0 ? (
+                            formatTopics(v.topics).map((topic) => (
+                              <span key={`${v.seriesId}-${v.year}-${topic}`} className={style.topicPill}>
+                                {topic}
+                              </span>
+                            ))
+                          ) : (
+                            <span className="muted">—</span>
+                          )}
+                        </div>
+                      </td>
                       <td className="mono">{v.year}</td>
                       <td className="muted">{formatLocation(v.city, v.country)}</td>
                       <td className="mono">{formatDate(v.submissionDeadline)}</td>
@@ -116,7 +140,7 @@ export default function VenueList({ query }: { query: string }) {
 
       <footer className="footer">
         <span className="muted">
-          Query: <code>WHERE Reviewing = FALSE AND Published = FALSE</code> (limited to 50 rows)
+          Query: <code>WHERE Reviewing = FALSE AND Published = FALSE</code> with optional topic filtering (limited to 50 rows)
         </span>
       </footer>
     </main>

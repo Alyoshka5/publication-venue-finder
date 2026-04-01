@@ -11,3 +11,12 @@ export const formatLocation = (city: string, country: string) => {
   if (!country) return city
   return `${city}, ${country}`
 }
+
+
+export const formatTopics = (value: string | null) => {
+  if (!value) return []
+  return value
+    .split(',')
+    .map((topic) => topic.trim())
+    .filter(Boolean)
+}

@@ -1,6 +1,7 @@
 import './App.css'
 import HomePage from './components/Home/HomePage';
 import CollectionsPage from './components/Collections/CollectionsPage';
+import AdminDashboard from './components/Admin/AdminDashboard'
 import NavBar from './components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import CollectionDetails from './components/Collections/CollectionDetails';
@@ -16,6 +17,7 @@ export default function App() {
           <Route index element={<CollectionList />} />
           <Route path=':id' element={<CollectionDetails />} />
         </Route>
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </>
   );
