@@ -4,6 +4,9 @@ import { formatDate, formatLocation } from '../../helpers/formatting';
 import { useParams } from 'react-router-dom';
 import type { Venue } from '../../models/venues';
 import type { Collection } from '../../models/collections';
+import { Link } from 'react-router-dom';
+import { Icon } from '@mdi/react';
+import { mdiChevronLeft } from '@mdi/js';
 
 export default function CollectionDetails() {
 	const [venues, setVenues] = useState<Venue[]>([]);
@@ -83,9 +86,34 @@ export default function CollectionDetails() {
 
   return (
       <main className="main">
+			<div className={style.returnLinkContainer}>
+				<Link to='/collections' className={`${style.returnLink} muted`}><Icon path={mdiChevronLeft} size={1} />Collections</Link>
+			</div>
+			<header className={style.header}>
+				<div className={style.headerContent}>
+					<div>
+						<p className={style.eyebrow}>My Collections</p>
+						<h1 className={style.title}>{collection?.name || 'Collection'}</h1>
+						
+						<div className={style.metaRow}>
+							<span className={style.metaItem}>
+								Created by <strong>{collection?.creatorName || 'You'}</strong>
+							</span>
+							<span className={style.separator} aria-hidden="true">•</span>
+							<span className={style.metaItem}>
+								{collection?.visibility}
+							</span>
+							<span className={style.separator} aria-hidden="true">•</span>
+							<span className={style.metaItem}>
+								Created on {collection?.createdAt ? formatDate(collection.createdAt.toString()) : 'Date'}
+							</span>
+						</div>
+					</div>
+				</div>
+			</header>
       <section className={`card ${style.contentContainer}`}>
         <div className="cardHeader">
-          <h2>{collection?.name || 'Collection'}</h2>
+          <h2>Collection Venues</h2>
 					<div className="meta">
             {loading
               ? 'Loading…'
