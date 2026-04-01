@@ -1,10 +1,9 @@
-import CollectionList from "./CollectionList";
-
+import { Outlet } from "react-router-dom";
 
 export default function CollectionsPage() {
     return (
         <div className="page">
-            <CollectionList />
+            <Outlet />
         </div>
     )
 }

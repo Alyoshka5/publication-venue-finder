@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import style from './CollectionList.module.css';
 import type { Collection } from '../../models/collections';
 import { formatDate } from '../../helpers/formatting';
+import { useNavigate } from 'react-router-dom';
 
 export default function CollectionList() {
   const [collections, setCollections] = useState<Collection[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const navigate = useNavigate();
 
   useEffect(() => {
     const controller = new AbortController()
@@ -72,7 +74,7 @@ export default function CollectionList() {
                   </tr>
                 ) : (
                   collections.map((c) => (
-                    <tr key={`${c.collectionId}`} className={style.collectionRow}>
+                    <tr key={`${c.collectionId}`} className={style.collectionRow} onClick={() => navigate(`/collections/${c.collectionId}`)}>
                       <td>
                         <div className={style.collectionCell}>
                           <div className={style.collectionTop}>
