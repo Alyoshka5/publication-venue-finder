@@ -26,3 +26,57 @@ export const getCollections = asyncHandler(async (req: Request, res: Response) =
         });
     }
 });
+
+export const getCollectionInfo = asyncHandler(async (req: Request, res: Response) => {
+    try {
+        const [rows] = await pool.query(
+            `
+            SELECT 
+                c.CollectionID AS collectionId, 
+                c.CreatorUserID AS creatorUserId, 
+                c.Name AS name, 
+                c.Visibility AS visibility, 
+                c.CreatedAt AS createdAt,
+                u.DisplayName as creatorName
+            FROM COLLECTION c
+            JOIN User u ON c.CreatorUserID = u.UserID
+            WHERE c.CollectionID = ${req.params.id}
+            `
+        );
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({
+            error: 'query failed',
+            details: err instanceof Error ? err.message : String(err)
+        });
+    }
+});
+
+export const getCollectionVenues = asyncHandler(async (req: Request, res: Response) => {
+    try {
+        const [rows] = await pool.query(
+            `
+            SELECT 
+                vs.SeriesID AS seriesId,
+                vs.Acronym AS acronym,
+                vi.Year AS year,
+                vi.Title AS title,
+                vi.City AS city,
+                vi.Country AS country,
+                vi.SubmissionDeadline AS submissionDeadline,
+                o.Name AS organization
+            FROM VENUE_INSTANCE vi
+            JOIN VENUE_SERIES vs ON vs.SeriesID = vi.SeriesID
+            JOIN ORGANIZATION o ON o.OrgID = vs.OrgID
+            JOIN COLLECTION_CONTAINS cc ON cc.SeriesID = vi.SeriesID AND cc.Year = vi.Year
+            WHERE cc.CollectionID = ${req.params.id}
+            `
+        );
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({
+            error: 'query failed',
+            details: err instanceof Error ? err.message : String(err)
+        });
+    }
+});

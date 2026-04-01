@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { UpcomingVenue } from '../../models/venues';
+import type { Venue } from '../../models/venues';
 import style from './VenueList.module.css';
 import { formatDate, formatLocation } from '../../helpers/formatting';
 
 export default function VenueList({ query }: { query: string }) {
-  const [venues, setVenues] = useState<UpcomingVenue[]>([])
+  const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -17,7 +17,7 @@ export default function VenueList({ query }: { query: string }) {
         setError(null)
         const res = await fetch('/api/venues/upcoming', { signal: controller.signal })
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
-        const data = (await res.json()) as UpcomingVenue[]
+        const data = (await res.json()) as Venue[]
         setVenues(Array.isArray(data) ? data : [])
       } catch (e) {
         if (e instanceof DOMException && e.name === 'AbortError') return
