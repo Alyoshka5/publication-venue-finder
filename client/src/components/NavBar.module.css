@@ -74,7 +74,31 @@
   }
 }
 
+.navButton {
+  all: unset;
+  box-sizing: border-box;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  text-align: left;
+
+  @media (max-width: 1024px) {
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+
 .navItem:hover {
+  color: var(--text-h);
+  background: color-mix(in srgb, var(--accent-bg) 28%, transparent);
+}
+
+.navButton:hover {
   color: var(--text-h);
   background: color-mix(in srgb, var(--accent-bg) 28%, transparent);
 }

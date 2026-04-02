@@ -34,6 +34,16 @@
   color: var(--text);
 }
 
+.authLinks {
+  margin-top: 18px;
+  display: flex;
+  gap: 14px;
+}
+
+.authLinks a {
+  color: #5b21b6;
+}
+
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
