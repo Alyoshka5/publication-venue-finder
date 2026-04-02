@@ -12,9 +12,9 @@ export const getCollections = asyncHandler(async (req: Request, res: Response) =
                 c.Name AS name, 
                 c.Visibility AS visibility, 
                 c.CreatedAt AS createdAt, 
-                COUNT(*) AS venueInstanceCount
+                COUNT(cc.CollectionID) AS venueInstanceCount
             FROM COLLECTION c
-            JOIN COLLECTION_CONTAINS cc ON cc.CollectionID = c.CollectionID
+            LEFT JOIN COLLECTION_CONTAINS cc ON cc.CollectionID = c.CollectionID
             GROUP BY c.CollectionID, c.CreatorUserID, c.Name, c.Visibility, c.CreatedAt
             `
         );
