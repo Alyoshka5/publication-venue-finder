@@ -745,7 +745,6 @@ CREATE TABLE COLLECTION (
   `CollectionID` int(8) NOT NULL AUTO_INCREMENT,
   `CreatorUserID` int(8) NOT NULL,
   `Name` varchar(255),
-  `Visibility` ENUM('Private','Public') DEFAULT 'Private',
   `CreatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (CollectionID),
   FOREIGN KEY (CreatorUserID) REFERENCES RESEARCHER(UserID)
@@ -756,12 +755,12 @@ CREATE TABLE COLLECTION (
 -- Dumping data for table `COLLECTION`
 --
 
-INSERT INTO `COLLECTION` (`CreatorUserID`, `Name`, `Visibility`, `CreatedAt`) VALUES
-(1, 'My ML Conferences', 'Private', '2024-09-05 10:00:00'),
-(3, 'NLP Reading List', 'Public', '2024-09-10 11:00:00'),
-(9, 'CogSci & Neuro', 'Private', '2024-09-15 09:00:00'),
-(16, 'Affect & HRI Venues', 'Public', '2024-09-20 08:00:00'),
-(7, 'Vision Conferences', 'Private', '2024-10-01 10:00:00');
+INSERT INTO `COLLECTION` (`CreatorUserID`, `Name`, `CreatedAt`) VALUES
+(1, 'My ML Conferences', '2024-09-05 10:00:00'),
+(3, 'NLP Reading List', '2024-09-10 11:00:00'),
+(9, 'CogSci & Neuro', '2024-09-15 09:00:00'),
+(16, 'Affect & HRI Venues', '2024-09-20 08:00:00'),
+(7, 'Vision Conferences', '2024-10-01 10:00:00');
 
 -- --------------------------------------------------------
 

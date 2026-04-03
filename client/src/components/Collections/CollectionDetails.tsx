@@ -101,10 +101,6 @@ export default function CollectionDetails() {
 							</span>
 							<span className={style.separator} aria-hidden="true">•</span>
 							<span className={style.metaItem}>
-								{collection?.visibility}
-							</span>
-							<span className={style.separator} aria-hidden="true">•</span>
-							<span className={style.metaItem}>
 								Created on {collection?.createdAt ? formatDate(collection.createdAt.toString()) : 'Date'}
 							</span>
 						</div>

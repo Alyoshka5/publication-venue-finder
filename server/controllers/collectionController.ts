@@ -10,12 +10,11 @@ export const getCollections = asyncHandler(async (req: Request, res: Response) =
                 c.CollectionID AS collectionId, 
                 c.CreatorUserID AS creatorUserId, 
                 c.Name AS name, 
-                c.Visibility AS visibility, 
                 c.CreatedAt AS createdAt, 
                 COUNT(cc.CollectionID) AS venueInstanceCount
             FROM COLLECTION c
             LEFT JOIN COLLECTION_CONTAINS cc ON cc.CollectionID = c.CollectionID
-            GROUP BY c.CollectionID, c.CreatorUserID, c.Name, c.Visibility, c.CreatedAt
+            GROUP BY c.CollectionID, c.CreatorUserID, c.Name, c.CreatedAt
             `
         );
         res.json(rows);
@@ -35,7 +34,6 @@ export const getCollectionInfo = asyncHandler(async (req: Request, res: Response
                 c.CollectionID AS collectionId, 
                 c.CreatorUserID AS creatorUserId, 
                 c.Name AS name, 
-                c.Visibility AS visibility, 
                 c.CreatedAt AS createdAt,
                 u.DisplayName as creatorName
             FROM COLLECTION c

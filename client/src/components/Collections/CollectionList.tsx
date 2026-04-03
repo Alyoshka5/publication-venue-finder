@@ -55,7 +55,6 @@ export default function CollectionList() {
                 <tr>
                   <th>Name</th>
                   <th>Venues</th>
-                  <th>Visibility</th>
                   <th>Created On</th>
                 </tr>
               </thead>
@@ -83,7 +82,6 @@ export default function CollectionList() {
                         </div>
                       </td>
                       <td className="muted">{c.venueInstanceCount}</td>
-                      <td className="mono">{c.visibility}</td>
                       <td className="muted">{formatDate(c.createdAt.toString())}</td>
                     </tr>
                   ))
