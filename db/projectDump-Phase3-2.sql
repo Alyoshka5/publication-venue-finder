@@ -15,7 +15,7 @@
 --
 
 CREATE TABLE `ORGANIZATION` (
-  `OrgID` int(8) NOT NULL,
+  `OrgID` int(8) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   `Website` varchar(255) NOT NULL,
   `Society` varchar(255),
@@ -53,7 +53,7 @@ INSERT INTO `ORGANIZATION` (`OrgID`, `Name`, `Website`, `Society`, `Publisher`, 
 --
 
 CREATE TABLE VENUE_SERIES (
-  `SeriesID` int(8) NOT NULL,
+  `SeriesID` int(8) NOT NULL AUTO_INCREMENT,
   `OrgID` int(8) NOT NULL,
   `Name` varchar(255) NOT NULL,
   `Acronym` varchar(50),
@@ -236,7 +236,7 @@ INSERT INTO `CONFERENCE_SERIES` (`SeriesID`, `TypicalMonth`, `TypicalCityPolicy`
 --
 
 CREATE TABLE TOPIC (
-  TopicID int(8) NOT NULL,
+  TopicID int(8) NOT NULL AUTO_INCREMENT,
   Name varchar(255) NOT NULL,
   PRIMARY KEY (TopicID)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -660,7 +660,7 @@ INSERT INTO `VENUE_INSTANCE` (`SeriesID`, `Year`, `Title`, `StartDate`, `EndDate
 --
 
 CREATE TABLE `USER` (
-  `UserID` int(8) NOT NULL,
+  `UserID` int(8) NOT NULL AUTO_INCREMENT,
   `Email` varchar(255) NOT NULL,
   `PasswordHash` varchar(255) NOT NULL,
   `DisplayName` varchar(255) NOT NULL,
@@ -742,10 +742,9 @@ INSERT INTO `ORGANIZER` (`UserID`) VALUES
 --
 
 CREATE TABLE COLLECTION (
-  `CollectionID` int(8) NOT NULL,
+  `CollectionID` int(8) NOT NULL AUTO_INCREMENT,
   `CreatorUserID` int(8) NOT NULL,
   `Name` varchar(255),
-  `Visibility` ENUM('Private','Public') DEFAULT 'Private',
   `CreatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (CollectionID),
   FOREIGN KEY (CreatorUserID) REFERENCES RESEARCHER(UserID)
@@ -756,12 +755,12 @@ CREATE TABLE COLLECTION (
 -- Dumping data for table `COLLECTION`
 --
 
-INSERT INTO `COLLECTION` (`CollectionID`, `CreatorUserID`, `Name`, `Visibility`, `CreatedAt`) VALUES
-(1, 1, 'My ML Conferences', 'Private', '2024-09-05 10:00:00'),
-(2, 3, 'NLP Reading List', 'Public', '2024-09-10 11:00:00'),
-(3, 9, 'CogSci & Neuro', 'Private', '2024-09-15 09:00:00'),
-(4, 16, 'Affect & HRI Venues', 'Public', '2024-09-20 08:00:00'),
-(5, 7, 'Vision Conferences', 'Private', '2024-10-01 10:00:00');
+INSERT INTO `COLLECTION` (`CollectionID`, `CreatorUserID`, `Name`, `CreatedAt`) VALUES
+(1, 1, 'My ML Conferences', '2024-09-05 10:00:00'),
+(2, 3, 'NLP Reading List', '2024-09-10 11:00:00'),
+(3, 9, 'CogSci & Neuro', '2024-09-15 09:00:00'),
+(4, 16, 'Affect & HRI Venues', '2024-09-20 08:00:00'),
+(5, 7, 'Vision Conferences', '2024-10-01 10:00:00');
 
 -- --------------------------------------------------------
 
@@ -770,12 +769,12 @@ INSERT INTO `COLLECTION` (`CollectionID`, `CreatorUserID`, `Name`, `Visibility`,
 --
 
 CREATE TABLE REQUEST (
-  `RequestID` int(8) NOT NULL,
+  `RequestID` int(8) NOT NULL AUTO_INCREMENT,
   `SubmittedByUserID` int(8) NOT NULL,
   `ReviewedByUserID` int(8),
   `CreatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `PayloadJSON` JSON,
-  `Status` varchar(50),
+  `Status` ENUM('pending','approved','rejected') NOT NULL DEFAULT 'pending',
   `RequestType` varchar(100),
   PRIMARY KEY (RequestID),
   FOREIGN KEY (SubmittedByUserID) REFERENCES ORGANIZER(UserID),
