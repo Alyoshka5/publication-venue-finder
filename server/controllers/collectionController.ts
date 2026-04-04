@@ -35,8 +35,9 @@ export const createCollection = asyncHandler(async (req: Request, res: Response)
             `
             INSERT 
             INTO COLLECTION (CreatorUserID, Name)
-            VALUES (1, "${name}")
-            `
+            VALUES (?, ?)
+            `,
+            [1, name]
         );
 
         res.json({ collectionId: (result as any).insertId });
@@ -60,8 +61,9 @@ export const getCollectionInfo = asyncHandler(async (req: Request, res: Response
                 u.DisplayName as creatorName
             FROM COLLECTION c
             JOIN User u ON c.CreatorUserID = u.UserID
-            WHERE c.CollectionID = ${req.params.id}
-            `
+            WHERE c.CollectionID = ?
+            `,
+            [req.params.id]
         );
         res.json(rows);
     } catch (err) {
@@ -89,8 +91,9 @@ export const getCollectionVenues = asyncHandler(async (req: Request, res: Respon
             JOIN VENUE_SERIES vs ON vs.SeriesID = vi.SeriesID
             JOIN ORGANIZATION o ON o.OrgID = vs.OrgID
             JOIN COLLECTION_CONTAINS cc ON cc.SeriesID = vi.SeriesID AND cc.Year = vi.Year
-            WHERE cc.CollectionID = ${req.params.id}
-            `
+            WHERE cc.CollectionID = ?
+            `,
+            [req.params.id]
         );
         res.json(rows);
     } catch (err) {
