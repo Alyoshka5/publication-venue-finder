@@ -13,6 +13,8 @@ export default function CollectionDetails() {
 	const [collection, setCollection] = useState<Collection>()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [openCollectionForm, setOpenCollectionForm] = useState<boolean>(false);
+  const [collectionName, setCollectionName] = useState<string>('')
 	const { id } = useParams()
   const navigate = useNavigate();
 	
@@ -24,8 +26,10 @@ export default function CollectionDetails() {
         const res = await fetch(`/api/collections/${id}`, { signal: controller.signal })
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
         const data = (await res.json()) as Collection[]
-				console.log(data)
+        console.log("HERE")
+        console.log(data)
         setCollection(data[0])
+        setCollectionName(data[0].name)
       } catch (e) {
         if (e instanceof DOMException && e.name === 'AbortError') return
         setError(e instanceof Error ? e.message : String(e))
@@ -102,6 +106,32 @@ export default function CollectionDetails() {
       }
   }
 
+  const updateCollection = async () => {
+    if (collectionName.trim() === '') return;
+
+    const controller = new AbortController()
+    try {
+        setError(null)
+        const res = await fetch(`/api/collections/${collection?.collectionId}`, { 
+          signal: controller.signal,
+          method: 'PUT',
+          headers : {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: collectionName.trim()
+          })
+        })
+        if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
+        
+        setCollectionName(collectionName)
+        setOpenCollectionForm(false)
+      } catch (e) {
+        if (e instanceof DOMException && e.name === 'AbortError') return
+        setError(e instanceof Error ? e.message : String(e))
+      }
+  }
+
   return (
       <main className="main">
 			<div className={style.returnLinkContainer}>
@@ -111,7 +141,19 @@ export default function CollectionDetails() {
 				<div className={style.headerContent}>
 					<div>
 						<p className={style.eyebrow}>My Collections</p>
-						<h1 className={style.title}>{collection?.name || 'Collection'}</h1>
+						<h1 className={`${style.title} ${openCollectionForm ? 'hidden' : ''}`}>{collectionName || 'Collection'}</h1>
+            <form className={`${style.collectionForm} ${openCollectionForm ? '' : 'hidden'}`} onSubmit={(e) => {
+              e.preventDefault()
+              updateCollection()
+            }}>
+              <input
+                className={style.collectionNameInput}
+                value={collectionName}
+                onChange={(e) => setCollectionName(e.target.value)}
+                placeholder="Collection name"
+              />
+              <button className={`pill ${style.updateButton}`}>Update</button>
+            </form>
 						
 						<div className={style.metaRow}>
 							<span className={style.metaItem}>
@@ -124,6 +166,7 @@ export default function CollectionDetails() {
 						</div>
 					</div>
           <div className={style.modificationButtonsContainer}>
+            <button className={`${style.modificationButton} ${openCollectionForm ? style.active : ''}`} onClick={() => setOpenCollectionForm(prevVal => !prevVal)}><Icon path={mdiSquareEditOutline} size={1} /></button>
             <button className={style.modificationButton} onClick={deleteCollection}><Icon path={mdiTrashCanOutline} size={1}/></button>
           </div>
 				</div>

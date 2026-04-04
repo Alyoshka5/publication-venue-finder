@@ -91,6 +91,51 @@
   gap: 3px;
 }
 
+.collectionForm {
+  display: flex;
+  gap: 5px;
+}
+
+.updateButton {
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  width: 80px;
+  justify-content: center;
+}
+
+.updateButton:hover {
+  cursor: pointer;
+  background: var(--accent-bg);
+}
+
+.collectionNameInput {
+  box-sizing: border-box;
+  height: 40px;
+  width: 100%;
+  min-width: 200px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 92%, transparent);
+  color: var(--text-h);
+  outline: none;
+  font-size: 30px;
+
+  &:focus-visible {
+    border-color: var(--accent-border);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-bg) 80%, transparent);
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
 .modificationButton {
   color: var(--accent-border);
   background: none;
@@ -106,6 +151,10 @@
 .modificationButton:hover {
   cursor: pointer;
   background: color-mix(in srgb, var(--accent-bg) 28%, transparent);
+}
+
+.modificationButton.active {
+  background: color-mix(in srgb, var(--accent-bg) 75%, transparent);
 }
 
 .venueRow:hover {

@@ -106,6 +106,29 @@ export const getCollectionVenues = asyncHandler(async (req: Request, res: Respon
     }
 });
 
+export const updateCollection = asyncHandler(async (req: Request, res: Response) => {
+    const { name } = req.body;
+
+    try {
+        const [result] = await pool.query(
+            `
+            UPDATE 
+            COLLECTION
+            SET Name = ?
+            WHERE CollectionID = ?
+            `,
+            [name, req.params.id]
+        );
+
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({
+            error: 'query failed',
+            details: err instanceof Error ? err.message : String(err)
+        });
+    }
+});
+
 export const deleteCollection = asyncHandler(async (req: Request, res: Response) => {
     try {
          await pool.query(
