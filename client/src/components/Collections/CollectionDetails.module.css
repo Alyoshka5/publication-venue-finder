@@ -1,0 +1,190 @@
+.returnLinkContainer {
+  width: 100%;
+  display: flex;
+}
+
+.returnLink {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  color: var(--accent-border);
+  transition: all 0.2s ease;
+}
+
+.returnLink:hover {
+  filter: brightness(1.5)
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 32px 20px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-2);
+}
+
+.headerContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerContent > div:first-child {
+  text-align: left;
+}
+
+.headerContent > div:nth-child(2) {
+  text-align: right;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.title {
+  margin: 8px 0 10px;
+  font-size: 30px;
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  max-width: 760px;
+  color: var(--text);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+}
+
+.metaItem strong {
+  color: var(--text-h);
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.separator {
+  opacity: 0.3;
+  font-size: 10px;
+}
+
+.modificationButtonsContainer {
+  display: flex;
+  gap: 3px;
+}
+
+.collectionForm {
+  display: flex;
+  gap: 5px;
+}
+
+.updateButton {
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  width: 80px;
+  justify-content: center;
+}
+
+.updateButton:hover {
+  cursor: pointer;
+  background: var(--accent-bg);
+}
+
+.collectionNameInput {
+  box-sizing: border-box;
+  height: 40px;
+  width: 100%;
+  min-width: 200px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 92%, transparent);
+  color: var(--text-h);
+  outline: none;
+  font-size: 30px;
+
+  &:focus-visible {
+    border-color: var(--accent-border);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-bg) 80%, transparent);
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
+.modificationButton {
+  color: var(--accent-border);
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modificationButton:hover {
+  cursor: pointer;
+  background: color-mix(in srgb, var(--accent-bg) 28%, transparent);
+}
+
+.modificationButton.active {
+  background: color-mix(in srgb, var(--accent-bg) 75%, transparent);
+}
+
+.venueRow:hover {
+    cursor: pointer;
+}
+
+.venueCell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.venueTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.venueTitle {
+  color: var(--text-h);
+  font-weight: 500;
+}
+
+.removeVenueButtonCellHeader {
+  width: 0;
+}
+
+.removeVenueButtonCell {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  align-content: center;
+}

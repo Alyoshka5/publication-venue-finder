@@ -1,4 +1,4 @@
-type UpcomingVenue = {
+type Venue = {
   seriesId: number
   acronym: string | null
   year: number
@@ -15,4 +15,4 @@ type TopicOption = {
   name: string
 }
 
-export type { UpcomingVenue, TopicOption }
+export type { Venue, TopicOption }

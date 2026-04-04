@@ -1,28 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import type { UpcomingVenue } from '../../models/venues';
+import type { Venue } from '../../models/venues';
 import style from './VenueList.module.css';
-
-const formatDate = (value: string | null) => {
-  if (!value) return '—'
-  const d = new Date(value)
-  if (Number.isNaN(d.getTime())) return value
-  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' })
-}
-
-const formatLocation = (city: string, country: string) => {
-  if (!city && !country) return '—'
-  if (!city) return country
-  if (!country) return city
-  return `${city}, ${country}`
-}
-
-const formatTopics = (value: string | null) => {
-  if (!value) return []
-  return value
-    .split(',')
-    .map((topic) => topic.trim())
-    .filter(Boolean)
-}
+import { formatDate, formatLocation, formatTopics } from '../../helpers/formatting';
 
 export default function VenueList({
   query,
@@ -31,7 +10,7 @@ export default function VenueList({
   query: string
   selectedTopicId: string
 }) {
-  const [venues, setVenues] = useState<UpcomingVenue[]>([])
+  const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -47,7 +26,7 @@ export default function VenueList({
         const suffix = params.toString()
         const res = await fetch(`/api/venues/upcoming${suffix ? `?${suffix}` : ''}`, { signal: controller.signal })
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
-        const data = (await res.json()) as UpcomingVenue[]
+        const data = (await res.json()) as Venue[]
         setVenues(Array.isArray(data) ? data : [])
       } catch (e) {
         if (e instanceof DOMException && e.name === 'AbortError') return

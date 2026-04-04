@@ -28,23 +28,23 @@ CREATE TABLE `ORGANIZATION` (
 -- Dumping data for table `ORGANIZATION`
 --
 
-INSERT INTO `ORGANIZATION` (`OrgID`, `Name`, `Website`, `Society`, `Publisher`, `University`) VALUES
-(1, 'IEEE', 'https://www.ieee.org', 'IEEE', 'IEEE Press', NULL),
-(2, 'ACM', 'https://www.acm.org', 'ACM', 'ACM Digital Library', NULL),
-(3, 'Springer', 'https://www.springer.com', NULL, 'Springer Nature', NULL),
-(4, 'Elsevier', 'https://www.elsevier.com', NULL, 'Elsevier', NULL),
-(5, 'USENIX', 'https://www.usenix.org', 'USENIX Association', 'USENIX', NULL),
-(6, 'AAAI', 'https://www.aaai.org', 'AAAI', 'AAAI Press', NULL),
-(7, 'ISOC', 'https://www.internetsociety.org', 'Internet Society', NULL, NULL),
-(8, 'IACR', 'https://www.iacr.org', 'IACR', 'IACR', NULL),
-(9, 'IFIP', 'https://www.ifip.org', 'IFIP', NULL, NULL),
-(10, 'ACL', 'https://www.aclweb.org', 'ACL', 'ACL Anthology', NULL),
-(11, 'ISCA', 'https://www.isca-speech.org', 'International Speech Communication Association', NULL, NULL),
-(12, 'APS', 'https://www.psychologicalscience.org', 'Association for Psychological Science', NULL, NULL),
-(13, 'Cognitive Science Society', 'https://cognitivesciencesociety.org', 'Cognitive Science Society', NULL, NULL),
-(14, 'Cognitive Neuroscience Society', 'https://www.cogneurosociety.org', 'Cognitive Neuroscience Society', NULL, NULL),
-(15, 'Nature Portfolio', 'https://www.nature.com', NULL, 'Springer Nature', NULL),
-(16, 'MIT Press', 'https://mitpress.mit.edu', NULL, 'MIT Press', NULL);
+INSERT INTO `ORGANIZATION` (`Name`, `Website`, `Society`, `Publisher`, `University`) VALUES
+('IEEE', 'https://www.ieee.org', 'IEEE', 'IEEE Press', NULL),
+('ACM', 'https://www.acm.org', 'ACM', 'ACM Digital Library', NULL),
+('Springer', 'https://www.springer.com', NULL, 'Springer Nature', NULL),
+('Elsevier', 'https://www.elsevier.com', NULL, 'Elsevier', NULL),
+('USENIX', 'https://www.usenix.org', 'USENIX Association', 'USENIX', NULL),
+('AAAI', 'https://www.aaai.org', 'AAAI', 'AAAI Press', NULL),
+('ISOC', 'https://www.internetsociety.org', 'Internet Society', NULL, NULL),
+('IACR', 'https://www.iacr.org', 'IACR', 'IACR', NULL),
+('IFIP', 'https://www.ifip.org', 'IFIP', NULL, NULL),
+('ACL', 'https://www.aclweb.org', 'ACL', 'ACL Anthology', NULL),
+('ISCA', 'https://www.isca-speech.org', 'International Speech Communication Association', NULL, NULL),
+('APS', 'https://www.psychologicalscience.org', 'Association for Psychological Science', NULL, NULL),
+('Cognitive Science Society', 'https://cognitivesciencesociety.org', 'Cognitive Science Society', NULL, NULL),
+('Cognitive Neuroscience Society', 'https://www.cogneurosociety.org', 'Cognitive Neuroscience Society', NULL, NULL),
+('Nature Portfolio', 'https://www.nature.com', NULL, 'Springer Nature', NULL),
+('MIT Press', 'https://mitpress.mit.edu', NULL, 'MIT Press', NULL);
 
 -- --------------------------------------------------------
 
@@ -68,81 +68,81 @@ CREATE TABLE VENUE_SERIES (
 -- Dumping data for table `VENUE_SERIES`
 --
 
-INSERT INTO `VENUE_SERIES` (`SeriesID`, `OrgID`, `Name`, `Acronym`, `Description`, `ActiveFlag`) VALUES
+INSERT INTO `VENUE_SERIES` (`OrgID`, `Name`, `Acronym`, `Description`, `ActiveFlag`) VALUES
 -- IEEE
-(1, 1, 'International Conference on Software Engineering', 'ICSE', 'Premier software engineering conference', TRUE),
-(2, 1, 'IEEE Symposium on Security and Privacy', 'S&P', 'Top venue for security and privacy research', TRUE),
-(3, 1, 'IEEE International Conference on Computer Communications', 'INFOCOM', 'Leading networking and communications conference', TRUE),
-(4, 1, 'IEEE Conference on Computer Vision and Pattern Recognition', 'CVPR', 'Premier computer vision conference', TRUE),
-(5, 1, 'IEEE International Conference on Data Mining', 'ICDM', 'Leading data mining conference', TRUE),
-(26, 1, 'International Symposium on Computer Architecture', 'ISCA', 'Premier computer architecture conference', TRUE),
-(27, 1, 'IEEE/ACM International Symposium on Microarchitecture', 'MICRO', 'Top microarchitecture conference', TRUE),
-(31, 1, 'IEEE International Conference on Affective Computing and Intelligent Interaction', 'ACII', 'Premier affective computing conference', TRUE),
-(33, 1, 'IEEE International Conference on Robotics and Automation', 'ICRA', 'Largest robotics conference', TRUE),
-(34, 1, 'IEEE/RSJ International Conference on Intelligent Robots and Systems', 'IROS', 'Leading intelligent robots conference', TRUE),
-(36, 1, 'IEEE International Conference on Acoustics, Speech and Signal Processing', 'ICASSP', 'Premier speech and signal processing conference', TRUE),
-(38, 1, 'IEEE International Conference on Computer Vision', 'ICCV', 'Top computer vision conference, held biennially', TRUE),
-(39, 1, 'European Conference on Computer Vision', 'ECCV', 'Leading European computer vision conference', TRUE),
-(41, 1, 'IEEE International Conference on Image Processing', 'ICIP', 'Leading image processing conference', TRUE),
+(1, 'International Conference on Software Engineering', 'ICSE', 'Premier software engineering conference', TRUE),
+(1, 'IEEE Symposium on Security and Privacy', 'S&P', 'Top venue for security and privacy research', TRUE),
+(1, 'IEEE International Conference on Computer Communications', 'INFOCOM', 'Leading networking and communications conference', TRUE),
+(1, 'IEEE Conference on Computer Vision and Pattern Recognition', 'CVPR', 'Premier computer vision conference', TRUE),
+(1, 'IEEE International Conference on Data Mining', 'ICDM', 'Leading data mining conference', TRUE),
+(1, 'International Symposium on Computer Architecture', 'ISCA', 'Premier computer architecture conference', TRUE),
+(1, 'IEEE/ACM International Symposium on Microarchitecture', 'MICRO', 'Top microarchitecture conference', TRUE),
+(1, 'IEEE International Conference on Affective Computing and Intelligent Interaction', 'ACII', 'Premier affective computing conference', TRUE),
+(1, 'IEEE International Conference on Robotics and Automation', 'ICRA', 'Largest robotics conference', TRUE),
+(1, 'IEEE/RSJ International Conference on Intelligent Robots and Systems', 'IROS', 'Leading intelligent robots conference', TRUE),
+(1, 'IEEE International Conference on Acoustics, Speech and Signal Processing', 'ICASSP', 'Premier speech and signal processing conference', TRUE),
+(1, 'IEEE International Conference on Computer Vision', 'ICCV', 'Top computer vision conference, held biennially', TRUE),
+(1, 'European Conference on Computer Vision', 'ECCV', 'Leading European computer vision conference', TRUE),
+(1, 'IEEE International Conference on Image Processing', 'ICIP', 'Leading image processing conference', TRUE),
 -- ACM
-(6, 2, 'ACM Special Interest Group on Data Communication', 'SIGCOMM', 'Premier data networking conference', TRUE),
-(7, 2, 'ACM SIGPLAN Conference on Programming Language Design and Implementation', 'PLDI', 'Top programming languages conference', TRUE),
-(8, 2, 'ACM Symposium on Theory of Computing', 'STOC', 'Premier theory of computing conference', TRUE),
-(9, 2, 'ACM Conference on Computer and Communications Security', 'CCS', 'Leading security conference', TRUE),
-(10, 2, 'ACM SIGMOD International Conference on Management of Data', 'SIGMOD', 'Premier database conference', TRUE),
-(11, 2, 'ACM Symposium on Operating Systems Principles', 'SOSP', 'Top operating systems conference', TRUE),
-(12, 2, 'ACM CHI Conference on Human Factors in Computing Systems', 'CHI', 'Premier HCI conference', TRUE),
-(13, 2, 'ACM SIGPLAN Symposium on Principles of Programming Languages', 'POPL', 'Leading PL theory conference', TRUE),
-(14, 2, 'ACM International Conference on Architectural Support for Programming Languages and Operating Systems', 'ASPLOS', 'Top systems and architecture conference', TRUE),
-(15, 2, 'ACM SIGKDD Conference on Knowledge Discovery and Data Mining', 'KDD', 'Premier data mining and KDD conference', TRUE),
-(22, 2, 'Conference on Neural Information Processing Systems', 'NeurIPS', 'Premier ML and AI conference', TRUE),
-(23, 2, 'International Conference on Machine Learning', 'ICML', 'Leading machine learning conference', TRUE),
-(24, 2, 'International Conference on Learning Representations', 'ICLR', 'Top deep learning conference', TRUE),
-(25, 2, 'International Conference on Very Large Data Bases', 'VLDB', 'Leading database systems conference', TRUE),
-(29, 2, 'ACM SIGCSE Technical Symposium on Computer Science Education', 'SIGCSE', 'Premier CS education conference', TRUE),
-(30, 2, 'ACM SIGMOD-SIGACT-SIGART Symposium on Principles of Database Systems', 'PODS', 'Leading database theory conference', TRUE),
-(35, 2, 'ACM/IEEE International Conference on Human-Robot Interaction', 'HRI', 'Premier human-robot interaction conference', TRUE),
+(2, 'ACM Special Interest Group on Data Communication', 'SIGCOMM', 'Premier data networking conference', TRUE),
+(2, 'ACM SIGPLAN Conference on Programming Language Design and Implementation', 'PLDI', 'Top programming languages conference', TRUE),
+(2, 'ACM Symposium on Theory of Computing', 'STOC', 'Premier theory of computing conference', TRUE),
+(2, 'ACM Conference on Computer and Communications Security', 'CCS', 'Leading security conference', TRUE),
+(2, 'ACM SIGMOD International Conference on Management of Data', 'SIGMOD', 'Premier database conference', TRUE),
+(2, 'ACM Symposium on Operating Systems Principles', 'SOSP', 'Top operating systems conference', TRUE),
+(2, 'ACM CHI Conference on Human Factors in Computing Systems', 'CHI', 'Premier HCI conference', TRUE),
+(2, 'ACM SIGPLAN Symposium on Principles of Programming Languages', 'POPL', 'Leading PL theory conference', TRUE),
+(2, 'ACM International Conference on Architectural Support for Programming Languages and Operating Systems', 'ASPLOS', 'Top systems and architecture conference', TRUE),
+(2, 'ACM SIGKDD Conference on Knowledge Discovery and Data Mining', 'KDD', 'Premier data mining and KDD conference', TRUE),
+(2, 'Conference on Neural Information Processing Systems', 'NeurIPS', 'Premier ML and AI conference', TRUE),
+(2, 'International Conference on Machine Learning', 'ICML', 'Leading machine learning conference', TRUE),
+(2, 'International Conference on Learning Representations', 'ICLR', 'Top deep learning conference', TRUE),
+(2, 'International Conference on Very Large Data Bases', 'VLDB', 'Leading database systems conference', TRUE),
+(2, 'ACM SIGCSE Technical Symposium on Computer Science Education', 'SIGCSE', 'Premier CS education conference', TRUE),
+(2, 'ACM SIGMOD-SIGACT-SIGART Symposium on Principles of Database Systems', 'PODS', 'Leading database theory conference', TRUE),
+(2, 'ACM/IEEE International Conference on Human-Robot Interaction', 'HRI', 'Premier human-robot interaction conference', TRUE),
 -- USENIX
-(16, 5, 'USENIX Symposium on Operating Systems Design and Implementation', 'OSDI', 'Top systems conference', TRUE),
-(17, 5, 'USENIX Security Symposium', 'USENIX Security', 'Leading security conference', TRUE),
-(18, 5, 'USENIX Symposium on Networked Systems Design and Implementation', 'NSDI', 'Top networked systems conference', TRUE),
-(19, 5, 'USENIX Annual Technical Conference', 'ATC', 'Broad systems research conference', TRUE),
+(5, 'USENIX Symposium on Operating Systems Design and Implementation', 'OSDI', 'Top systems conference', TRUE),
+(5, 'USENIX Security Symposium', 'USENIX Security', 'Leading security conference', TRUE),
+(5, 'USENIX Symposium on Networked Systems Design and Implementation', 'NSDI', 'Top networked systems conference', TRUE),
+(5, 'USENIX Annual Technical Conference', 'ATC', 'Broad systems research conference', TRUE),
 -- AAAI
-(20, 6, 'AAAI Conference on Artificial Intelligence', 'AAAI', 'Premier broad AI conference', TRUE),
-(21, 6, 'Innovative Applications of Artificial Intelligence', 'IAAI', 'Applied AI conference', TRUE),
+(6, 'AAAI Conference on Artificial Intelligence', 'AAAI', 'Premier broad AI conference', TRUE),
+(6, 'Innovative Applications of Artificial Intelligence', 'IAAI', 'Applied AI conference', TRUE),
 -- ISOC
-(28, 7, 'Network and Distributed System Security Symposium', 'NDSS', 'Top network security conference', TRUE),
+(7, 'Network and Distributed System Security Symposium', 'NDSS', 'Top network security conference', TRUE),
 -- IACR
-(42, 8, 'International Cryptology Conference', 'CRYPTO', 'Premier cryptography conference', TRUE),
-(43, 8, 'European Cryptology Conference', 'EUROCRYPT', 'Leading European cryptography conference', TRUE),
+(8, 'International Cryptology Conference', 'CRYPTO', 'Premier cryptography conference', TRUE),
+(8, 'European Cryptology Conference', 'EUROCRYPT', 'Leading European cryptography conference', TRUE),
 -- ACL
-(44, 10, 'Annual Meeting of the Association for Computational Linguistics', 'ACL', 'Premier NLP conference', TRUE),
-(45, 10, 'Conference on Empirical Methods in Natural Language Processing', 'EMNLP', 'Top empirical NLP conference', TRUE),
-(46, 10, 'North American Chapter of the ACL', 'NAACL', 'Leading North American NLP conference', TRUE),
+(10, 'Annual Meeting of the Association for Computational Linguistics', 'ACL', 'Premier NLP conference', TRUE),
+(10, 'Conference on Empirical Methods in Natural Language Processing', 'EMNLP', 'Top empirical NLP conference', TRUE),
+(10, 'North American Chapter of the ACL', 'NAACL', 'Leading North American NLP conference', TRUE),
 -- Interspeech (ISCA org - need OrgID)
-(37, 11, 'Interspeech', 'INTERSPEECH', 'Premier speech processing conference', TRUE),
+(11, 'Interspeech', 'INTERSPEECH', 'Premier speech processing conference', TRUE),
 -- Journals (CS)
-(50, 2, 'Communications of the ACM', 'CACM', 'Flagship ACM publication covering all areas of CS', TRUE),
-(51, 4, 'Journal of Artificial Intelligence Research', 'JAIR', 'Open-access journal covering all areas of AI', TRUE),
-(52, 1, 'IEEE Transactions on Neural Networks and Learning Systems', 'TNNLS', 'IEEE journal on neural networks and ML', TRUE),
-(53, 2, 'ACM Transactions on Programming Languages and Systems', 'TOPLAS', 'ACM journal on PL theory and implementation', TRUE),
-(54, 4, 'Information and Computation', 'IC', 'Elsevier journal on theoretical CS and logic', TRUE),
+(2, 'Communications of the ACM', 'CACM', 'Flagship ACM publication covering all areas of CS', TRUE),
+(4, 'Journal of Artificial Intelligence Research', 'JAIR', 'Open-access journal covering all areas of AI', TRUE),
+(1, 'IEEE Transactions on Neural Networks and Learning Systems', 'TNNLS', 'IEEE journal on neural networks and ML', TRUE),
+(2, 'ACM Transactions on Programming Languages and Systems', 'TOPLAS', 'ACM journal on PL theory and implementation', TRUE),
+(4, 'Information and Computation', 'IC', 'Elsevier journal on theoretical CS and logic', TRUE),
 -- Journals (Cog Sci / Neuro / Nature)
-(55, 15, 'Nature', 'Nature', 'Premier multidisciplinary science journal', TRUE),
-(56, 15, 'Nature Human Behaviour', 'NHB', 'Nature journal covering human behaviour research', TRUE),
-(57, 15, 'Nature Neuroscience', 'NatNeuro', 'Nature journal on neuroscience', TRUE),
-(58, 16, 'Cognitive Science', 'CogSci-J', 'Official journal of the Cognitive Science Society', TRUE),
-(59, 16, 'Neural Computation', 'NeuralComp', 'MIT Press journal on computational neuroscience', TRUE),
+(15, 'Nature', 'Nature', 'Premier multidisciplinary science journal', TRUE),
+(15, 'Nature Human Behaviour', 'NHB', 'Nature journal covering human behaviour research', TRUE),
+(15, 'Nature Neuroscience', 'NatNeuro', 'Nature journal on neuroscience', TRUE),
+(16, 'Cognitive Science', 'CogSci-J', 'Official journal of the Cognitive Science Society', TRUE),
+(16, 'Neural Computation', 'NeuralComp', 'MIT Press journal on computational neuroscience', TRUE),
 -- Conferences (Cog Sci / Neuro / Psych)
-(60, 13, 'Annual Conference of the Cognitive Science Society', 'CogSci', 'Premier interdisciplinary cognitive science conference', TRUE),
-(61, 14, 'Annual Meeting of the Cognitive Neuroscience Society', 'CNS', 'Premier cognitive neuroscience conference', TRUE),
-(62, 12, 'APS Annual Convention', 'APS', 'Premier psychological science convention', TRUE),
-(63, 14, 'Conference on Cognitive Computational Neuroscience', 'CCN', 'Computational approaches to brain and cognition', TRUE),
-(32, 1, 'IEEE Conference on Virtual Reality and 3D User Interfaces', 'IEEE VR', 'Premier conference on virtual and augmented reality', TRUE),
-(40, 2, 'ACM SIGGRAPH Conference on Computer Graphics and Interactive Techniques', 'SIGGRAPH', 'Premier computer graphics and interactive techniques conference', TRUE),
-(47, 1, 'IEEE International Conference on Quantum Computing and Engineering', 'IEEE Quantum Week', 'Leading quantum computing conference', TRUE),
-(48, 1, 'IEEE International Conference on Bioinformatics and Biomedicine', 'BIBM', 'Premier bioinformatics and biomedicine conference', TRUE),
-(49, 2, 'ACM Symposium on User Interface Software and Technology', 'UIST', 'Leading HCI and user interface conference', TRUE);
+(13, 'Annual Conference of the Cognitive Science Society', 'CogSci', 'Premier interdisciplinary cognitive science conference', TRUE),
+(14, 'Annual Meeting of the Cognitive Neuroscience Society', 'CNS', 'Premier cognitive neuroscience conference', TRUE),
+(12, 'APS Annual Convention', 'APS', 'Premier psychological science convention', TRUE),
+(14, 'Conference on Cognitive Computational Neuroscience', 'CCN', 'Computational approaches to brain and cognition', TRUE),
+(1, 'IEEE Conference on Virtual Reality and 3D User Interfaces', 'IEEE VR', 'Premier conference on virtual and augmented reality', TRUE),
+(2, 'ACM SIGGRAPH Conference on Computer Graphics and Interactive Techniques', 'SIGGRAPH', 'Premier computer graphics and interactive techniques conference', TRUE),
+(1, 'IEEE International Conference on Quantum Computing and Engineering', 'IEEE Quantum Week', 'Leading quantum computing conference', TRUE),
+(1, 'IEEE International Conference on Bioinformatics and Biomedicine', 'BIBM', 'Premier bioinformatics and biomedicine conference', TRUE),
+(2, 'ACM Symposium on User Interface Software and Technology', 'UIST', 'Leading HCI and user interface conference', TRUE);
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,7 @@ INSERT INTO `VENUE_SERIES` (`SeriesID`, `OrgID`, `Name`, `Acronym`, `Description
 --
 
 CREATE TABLE CONFERENCE_SERIES (
-  `SeriesID` int(8) NOT NULL,
+  `SeriesID` int(8) NOT NULL AUTO_INCREMENT,
   `TypicalMonth` int(8) NOT NULL,
   `TypicalCityPolicy` varchar(255) NOT NULL,
   `Tier` varchar(100),
@@ -165,69 +165,69 @@ CREATE TABLE CONFERENCE_SERIES (
 -- Dumping data for table `CONFERENCE_SERIES`
 --
 
-INSERT INTO `CONFERENCE_SERIES` (`SeriesID`, `TypicalMonth`, `TypicalCityPolicy`, `Tier`) VALUES
+INSERT INTO `CONFERENCE_SERIES` (`TypicalMonth`, `TypicalCityPolicy`, `Tier`) VALUES
 -- IEEE
-(1, 4, 'Rotating international cities', '1'),      -- ICSE: April
-(2, 5, 'San Francisco, CA (fixed)', '1'),           -- S&P: May
-(3, 5, 'Rotating international cities', '1'),       -- INFOCOM: May
-(4, 6, 'Rotating US cities', '1'),                  -- CVPR: June
-(5, 11, 'Rotating international cities', '2'),      -- ICDM: November
-(26, 6, 'Rotating international cities', '1'),      -- ISCA: June
-(27, 10, 'Rotating international cities', '1'),     -- MICRO: October
-(31, 9, 'Rotating international cities', '3'),      -- ACII: September
-(33, 5, 'Rotating international cities', '1'),      -- ICRA: May
-(34, 10, 'Rotating international cities', '1'),     -- IROS: October
-(36, 4, 'Rotating international cities', '2'),      -- ICASSP: April
-(38, 10, 'Rotating international cities', '1'),     -- ICCV: October (biennial)
-(39, 9, 'Rotating European cities', '1'),           -- ECCV: September (biennial)
-(41, 9, 'Rotating international cities', '2'),      -- ICIP: September
+(4, 'Rotating international cities', '1'),      -- ICSE: April
+(5, 'San Francisco, CA (fixed)', '1'),           -- S&P: May
+(5, 'Rotating international cities', '1'),       -- INFOCOM: May
+(6, 'Rotating US cities', '1'),                  -- CVPR: June
+(11, 'Rotating international cities', '2'),      -- ICDM: November
+(6, 'Rotating international cities', '1'),      -- ISCA: June
+(10, 'Rotating international cities', '1'),     -- MICRO: October
+(9, 'Rotating international cities', '3'),      -- ACII: September
+(5, 'Rotating international cities', '1'),      -- ICRA: May
+(10, 'Rotating international cities', '1'),     -- IROS: October
+(4, 'Rotating international cities', '2'),      -- ICASSP: April
+(10, 'Rotating international cities', '1'),     -- ICCV: October (biennial)
+(9, 'Rotating European cities', '1'),           -- ECCV: September (biennial)
+(9, 'Rotating international cities', '2'),      -- ICIP: September
 -- ACM
-(6, 8, 'Rotating international cities', '1'),       -- SIGCOMM: August
-(7, 6, 'Rotating international cities', '1'),       -- PLDI: June
-(8, 6, 'Rotating international cities', '1'),       -- STOC: June
-(9, 11, 'Rotating international cities', '1'),      -- CCS: November
-(10, 6, 'Rotating international cities', '1'),      -- SIGMOD: June
-(11, 10, 'Rotating international cities', '1'),     -- SOSP: October (biennial)
-(12, 4, 'Rotating international cities', '1'),      -- CHI: April
-(13, 1, 'Rotating international cities', '1'),      -- POPL: January
-(14, 3, 'Rotating international cities', '1'),      -- ASPLOS: March
-(15, 8, 'Rotating international cities', '1'),      -- KDD: August
-(22, 12, 'New Orleans, LA / Vancouver, BC', '1'),   -- NeurIPS: December
-(23, 7, 'Rotating international cities', '1'),      -- ICML: July
-(24, 4, 'Rotating international cities', '1'),      -- ICLR: April
-(25, 8, 'Rotating international cities', '1'),      -- VLDB: August
-(29, 3, 'Rotating US/Canada cities', '2'),          -- SIGCSE: March
-(30, 6, 'Rotating international cities', '1'),      -- PODS: June
-(35, 3, 'Rotating international cities', '2'),      -- HRI: March
+(8, 'Rotating international cities', '1'),       -- SIGCOMM: August
+(6, 'Rotating international cities', '1'),       -- PLDI: June
+(6, 'Rotating international cities', '1'),       -- STOC: June
+(11, 'Rotating international cities', '1'),      -- CCS: November
+(6, 'Rotating international cities', '1'),      -- SIGMOD: June
+(10, 'Rotating international cities', '1'),     -- SOSP: October (biennial)
+(4, 'Rotating international cities', '1'),      -- CHI: April
+(1, 'Rotating international cities', '1'),      -- POPL: January
+(3, 'Rotating international cities', '1'),      -- ASPLOS: March
+(8, 'Rotating international cities', '1'),      -- KDD: August
+(12, 'New Orleans, LA / Vancouver, BC', '1'),   -- NeurIPS: December
+(7, 'Rotating international cities', '1'),      -- ICML: July
+(4, 'Rotating international cities', '1'),      -- ICLR: April
+(8, 'Rotating international cities', '1'),      -- VLDB: August
+(3, 'Rotating US/Canada cities', '2'),          -- SIGCSE: March
+(6, 'Rotating international cities', '1'),      -- PODS: June
+(3, 'Rotating international cities', '2'),      -- HRI: March
 -- USENIX
-(16, 11, 'Rotating US cities', '1'),                -- OSDI: November (biennial)
-(17, 8, 'Rotating US cities', '1'),                 -- USENIX Security: August
-(18, 4, 'Rotating US cities', '1'),                 -- NSDI: April
-(19, 7, 'Rotating US cities', '2'),                 -- ATC: July
+(11, 'Rotating US cities', '1'),                -- OSDI: November (biennial)
+(8, 'Rotating US cities', '1'),                 -- USENIX Security: August
+(4, 'Rotating US cities', '1'),                 -- NSDI: April
+(7, 'Rotating US cities', '2'),                 -- ATC: July
 -- AAAI
-(20, 2, 'Rotating US cities', '1'),                 -- AAAI: February
-(21, 2, 'Rotating US cities', '3'),                 -- IAAI: February
+(2, 'Rotating US cities', '1'),                 -- AAAI: February
+(2, 'Rotating US cities', '3'),                 -- IAAI: February
 -- ISOC
-(28, 2, 'San Diego, CA (fixed)', '1'),              -- NDSS: February
+(2, 'San Diego, CA (fixed)', '1'),              -- NDSS: February
 -- IACR
-(42, 8, 'Rotating international cities', '1'),      -- CRYPTO: August
-(43, 5, 'Rotating European cities', '1'),           -- EUROCRYPT: May
+(8, 'Rotating international cities', '1'),      -- CRYPTO: August
+(5, 'Rotating European cities', '1'),           -- EUROCRYPT: May
 -- ACL
-(44, 7, 'Rotating international cities', '1'),      -- ACL: July
-(45, 11, 'Rotating international cities', '1'),     -- EMNLP: November
-(46, 6, 'Rotating North American cities', '2'),     -- NAACL: June
+(7, 'Rotating international cities', '1'),      -- ACL: July
+(11, 'Rotating international cities', '1'),     -- EMNLP: November
+(6, 'Rotating North American cities', '2'),     -- NAACL: June
 -- ISCA
-(37, 9, 'Rotating international cities', '2'),      -- INTERSPEECH: September
+(9, 'Rotating international cities', '2'),      -- INTERSPEECH: September
 -- COGS-type
-(60, 7, 'Rotating international cities', '3'),   -- CogSci: July
-(61, 3, 'Rotating US/Canada cities', '3'),        -- CNS: March/April
-(62, 5, 'Rotating international cities', '3'),    -- APS: May
-(63, 8, 'Rotating international cities', '3'),    -- CCN: August
-(32, 3, 'Rotating international cities', '2'),    -- IEEE VR: March
-(40, 8, 'Rotating international cities', '1'),    -- SIGGRAPH: August
-(47, 9, 'Denver, CO (fixed)', '3'),               -- IEEE Quantum Week: September
-(48, 11, 'Rotating international cities', '3'),   -- BIBM: November
-(49, 10, 'Rotating international cities', '1');   -- UIST: October
+(7, 'Rotating international cities', '3'),   -- CogSci: July
+(3, 'Rotating US/Canada cities', '3'),        -- CNS: March/April
+(5, 'Rotating international cities', '3'),    -- APS: May
+(8, 'Rotating international cities', '3'),    -- CCN: August
+(3, 'Rotating international cities', '2'),    -- IEEE VR: March
+(8, 'Rotating international cities', '1'),    -- SIGGRAPH: August
+(9, 'Denver, CO (fixed)', '3'),               -- IEEE Quantum Week: September
+(11, 'Rotating international cities', '3'),   -- BIBM: November
+(10, 'Rotating international cities', '1');   -- UIST: October
 
 -- --------------------------------------------------------
 
@@ -244,70 +244,70 @@ CREATE TABLE TOPIC (
 --
 -- Dumping data for table `TOPIC`
 --
-INSERT INTO `TOPIC` (`TopicID`, `Name`) VALUES
+INSERT INTO `TOPIC` (`Name`) VALUES
 -- AI- / ML-related
-(1, 'Machine Learning'),
-(2, 'Deep Learning'),
-(3, 'Reinforcement Learning'),
-(4, 'Natural Language Processing'),
-(5, 'Large Language Models'),
-(6, 'Computer Vision'),
-(7, 'Multimodal AI'),
-(8, 'AI Ethics & Fairness'),
-(9, 'AI for Science'),
-(10, 'Embodied AI'),
-(11, 'Neurosymbolic AI'),
-(12, 'Joint Embedding Predictive Architecture'),
+('Machine Learning'),
+('Deep Learning'),
+('Reinforcement Learning'),
+('Natural Language Processing'),
+('Large Language Models'),
+('Computer Vision'),
+('Multimodal AI'),
+('AI Ethics & Fairness'),
+('AI for Science'),
+('Embodied AI'),
+('Neurosymbolic AI'),
+('Joint Embedding Predictive Architecture'),
 -- Perception / Signal Processing
-(13, 'Speech Processing'),
-(14, 'Audio & Music Computing'),
-(15, 'Image Processing'),
-(16, 'Video & Motion Analysis'),
-(17, 'Affective Computing'),
+('Speech Processing'),
+('Audio & Music Computing'),
+('Image Processing'),
+('Video & Motion Analysis'),
+('Affective Computing'),
 -- Robotics / Interaction Subfields
-(18, 'Robotics'),
-(19, 'Human-Robot Interaction'),
-(20, 'Human-Computer Interaction'),
-(21, 'Mixed & Augmented Reality'),
-(22, 'Ubiquitous Computing'),
+('Robotics'),
+('Human-Robot Interaction'),
+('Human-Computer Interaction'),
+('Mixed & Augmented Reality'),
+('Ubiquitous Computing'),
 -- Security / Cryptography
-(23, 'Network Security'),
-(24, 'Cryptography'),
-(25, 'Privacy'),
-(26, 'Malware & Forensics'),
-(27, 'Dependable Systems'),
+('Network Security'),
+('Cryptography'),
+('Privacy'),
+('Malware & Forensics'),
+('Dependable Systems'),
 -- Systems / Architecture
-(28, 'Operating Systems'),
-(29, 'Computer Architecture'),
-(30, 'Distributed Systems'),
-(31, 'High Performance Computing'),
-(32, 'Networking'),
+('Operating Systems'),
+('Computer Architecture'),
+('Distributed Systems'),
+('High Performance Computing'),
+('Networking'),
 -- Data (Retrieval, Manipulation, Storage, Systems)
-(33, 'Databases'),
-(34, 'Data Mining'),
-(35, 'Information Retrieval'),
-(36, 'Big Data'),
-(37, 'Datasets & Benchmarks'),
+('Databases'),
+('Data Mining'),
+('Information Retrieval'),
+('Big Data'),
+('Datasets & Benchmarks'),
 -- Theory / Programming
-(38, 'Algorithms & Complexity'),
-(39, 'Programming Languages'),
-(40, 'Formal Methods'),
-(41, 'Software Engineering'),
-(42, 'Logic in CS'),
+('Algorithms & Complexity'),
+('Programming Languages'),
+('Formal Methods'),
+('Software Engineering'),
+('Logic in CS'),
 -- Emerging / Frontier / Crossdisciplinary
-(43, 'Quantum Computing'),
-(44, 'CS Education'),
-(45, 'AI Impacts & Society'),
+('Quantum Computing'),
+('CS Education'),
+('AI Impacts & Society'),
 -- Other
-(46, 'Wireless & Mobile Computing'),
-(47, 'Information Systems'),
-(48, 'Computer Graphics & Animation'),
-(49, 'Human Motion Analysis'),
-(50, 'Parallel Computing'),
+('Wireless & Mobile Computing'),
+('Information Systems'),
+('Computer Graphics & Animation'),
+('Human Motion Analysis'),
+('Parallel Computing'),
 -- COGS / Neuro-type topics
-(51, 'Cognitive Science'),
-(52, 'Computational Neuroscience'),
-(53, 'Psychological Science');
+('Cognitive Science'),
+('Computational Neuroscience'),
+('Psychological Science');
 
 -- --------------------------------------------------------
 
@@ -673,32 +673,32 @@ CREATE TABLE `USER` (
 -- Dumping data for table `USER`
 
 
-INSERT INTO `USER` (`UserID`, `Email`, `PasswordHash`, `DisplayName`, `CreatedAt`) VALUES
-(1, 'alice_ml@fakemail.com', 'hash_alice_001', 'Alice_ML', '2024-01-15 09:00:00'),
-(2, 'bob_sec@fakemail.com', 'hash_bob_002', 'Bob_Sec', '2024-01-16 10:30:00'),
-(3, 'carol_nlp@fakemail.com', 'hash_carol_003', 'Carol_NLP', '2024-02-01 08:45:00'),
-(4, 'dave_sys@fakemail.com', 'hash_dave_004', 'Dave_Sys', '2024-02-10 14:00:00'),
-(5, 'eve_hci@fakemail.com', 'hash_eve_005', 'Eve_HCI', '2024-03-05 11:15:00'),
-(6, 'frank_robot@fakemail.com', 'hash_frank_006', 'Frank_Robot', '2024-03-20 09:30:00'),
-(7, 'grace_vision@fakemail.com', 'hash_grace_007', 'Grace_Vision', '2024-04-01 13:00:00'),
-(8, 'hal_theory@fakemail.com', 'hash_hal_008', 'Hal_Theory', '2024-04-15 10:00:00'),
-(9, 'iris_cogsci@fakemail.com', 'hash_iris_009', 'Iris_CogSci', '2024-05-01 08:00:00'),
-(10, 'jules_data@fakemail.com', 'hash_jules_010', 'Jules_Data', '2024-05-10 15:30:00'),
-(11, 'kai_rl@fakemail.com', 'hash_kai_011', 'Kai_RL', '2024-06-01 09:00:00'),
-(12, 'luna_net@fakemail.com', 'hash_luna_012', 'Luna_Net', '2024-06-15 11:00:00'),
-(13, 'max_quant@fakemail.com', 'hash_max_013', 'Max_Quant', '2024-07-01 10:00:00'),
-(14, 'nina_ethics@fakemail.com', 'hash_nina_014', 'Nina_Ethics', '2024-07-15 14:00:00'),
-(15, 'omar_multi@fakemail.com', 'hash_omar_015', 'Omar_Multi', '2024-08-01 09:30:00'),
-(16, 'zoe_affect@fakemail.com', 'hash_zoe_016', 'Zoe_Affect', '2024-08-15 08:00:00'),
-(17, 'orguser_01@fakemail.com', 'hash_org_017', 'OrgUser_01', '2024-09-01 10:00:00'),
-(18, 'adminuser_01@fakemail.com', 'hash_admin_018', 'AdminUser_01', '2024-09-01 10:01:00'),
-(19, 'adminuser_02@fakemail.com', 'hash_admin_019', 'AdminUser_02', '2024-09-02 10:00:00'),
-(20, 'adminuser_03@fakemail.com', 'hash_admin_020', 'AdminUser_03', '2024-09-03 10:00:00'),
-(21, 'adminuser_04@fakemail.com', 'hash_admin_021', 'AdminUser_04', '2024-09-04 10:00:00'),
-(22, 'orguser_02@fakemail.com', 'hash_org_022', 'OrgUser_02', '2024-09-05 10:00:00'),
-(23, 'orguser_03@fakemail.com', 'hash_org_023', 'OrgUser_03', '2024-09-06 10:00:00'),
-(24, 'orguser_04@fakemail.com', 'hash_org_024', 'OrgUser_04', '2024-09-07 10:00:00'),
-(25, 'orguser_05@fakemail.com', 'hash_org_025', 'OrgUser_05', '2024-09-08 10:00:00');
+INSERT INTO `USER` (`Email`, `PasswordHash`, `DisplayName`, `CreatedAt`) VALUES
+('alice_ml@fakemail.com', 'hash_alice_001', 'Alice_ML', '2024-01-15 09:00:00'),
+('bob_sec@fakemail.com', 'hash_bob_002', 'Bob_Sec', '2024-01-16 10:30:00'),
+('carol_nlp@fakemail.com', 'hash_carol_003', 'Carol_NLP', '2024-02-01 08:45:00'),
+('dave_sys@fakemail.com', 'hash_dave_004', 'Dave_Sys', '2024-02-10 14:00:00'),
+('eve_hci@fakemail.com', 'hash_eve_005', 'Eve_HCI', '2024-03-05 11:15:00'),
+('frank_robot@fakemail.com', 'hash_frank_006', 'Frank_Robot', '2024-03-20 09:30:00'),
+('grace_vision@fakemail.com', 'hash_grace_007', 'Grace_Vision', '2024-04-01 13:00:00'),
+('hal_theory@fakemail.com', 'hash_hal_008', 'Hal_Theory', '2024-04-15 10:00:00'),
+('iris_cogsci@fakemail.com', 'hash_iris_009', 'Iris_CogSci', '2024-05-01 08:00:00'),
+('jules_data@fakemail.com', 'hash_jules_010', 'Jules_Data', '2024-05-10 15:30:00'),
+('kai_rl@fakemail.com', 'hash_kai_011', 'Kai_RL', '2024-06-01 09:00:00'),
+('luna_net@fakemail.com', 'hash_luna_012', 'Luna_Net', '2024-06-15 11:00:00'),
+('max_quant@fakemail.com', 'hash_max_013', 'Max_Quant', '2024-07-01 10:00:00'),
+('nina_ethics@fakemail.com', 'hash_nina_014', 'Nina_Ethics', '2024-07-15 14:00:00'),
+('omar_multi@fakemail.com', 'hash_omar_015', 'Omar_Multi', '2024-08-01 09:30:00'),
+('zoe_affect@fakemail.com', 'hash_zoe_016', 'Zoe_Affect', '2024-08-15 08:00:00'),
+('orguser_01@fakemail.com', 'hash_org_017', 'OrgUser_01', '2024-09-01 10:00:00'),
+('adminuser_01@fakemail.com', 'hash_admin_018', 'AdminUser_01', '2024-09-01 10:01:00'),
+('adminuser_02@fakemail.com', 'hash_admin_019', 'AdminUser_02', '2024-09-02 10:00:00'),
+('adminuser_03@fakemail.com', 'hash_admin_020', 'AdminUser_03', '2024-09-03 10:00:00'),
+('adminuser_04@fakemail.com', 'hash_admin_021', 'AdminUser_04', '2024-09-04 10:00:00'),
+('orguser_02@fakemail.com', 'hash_org_022', 'OrgUser_02', '2024-09-05 10:00:00'),
+('orguser_03@fakemail.com', 'hash_org_023', 'OrgUser_03', '2024-09-06 10:00:00'),
+('orguser_04@fakemail.com', 'hash_org_024', 'OrgUser_04', '2024-09-07 10:00:00'),
+('orguser_05@fakemail.com', 'hash_org_025', 'OrgUser_05', '2024-09-08 10:00:00');
 -- --------------------------------------------------------
 
 -- 
@@ -785,12 +785,12 @@ CREATE TABLE REQUEST (
 -- Dumping data for table `REQUEST`
 --
 
-INSERT INTO `REQUEST` (`RequestID`, `SubmittedByUserID`, `ReviewedByUserID`, `CreatedAt`, `PayloadJSON`, `Status`, `RequestType`) VALUES
-(1, 17, 16, '2024-10-01 10:00:00', '{"action": "add_venue", "name": "Workshop on Affective AI"}', 'approved', 'add_venue'),
-(2, 22, 18, '2024-10-15 11:00:00', '{"action": "add_venue", "name": "Symposium on Human-AI Teaming"}', 'pending', 'add_venue'),
-(3, 23, 19, '2024-11-01 09:00:00', '{"action": "edit_venue", "seriesID": 31}', 'approved', 'edit_venue'),
-(4, 24, 20, '2024-11-15 14:00:00', '{"action": "add_venue", "name": "Workshop on Quantum ML"}', 'rejected', 'add_venue'),
-(5, 25, 21, '2024-12-01 10:00:00', '{"action": "add_venue", "name": "Forum on AI Safety"}', 'pending', 'add_venue');
+INSERT INTO `REQUEST` (`SubmittedByUserID`, `ReviewedByUserID`, `CreatedAt`, `PayloadJSON`, `Status`, `RequestType`) VALUES
+(17, 16, '2024-10-01 10:00:00', '{"action": "add_venue", "name": "Workshop on Affective AI"}', 'approved', 'add_venue'),
+(22, 18, '2024-10-15 11:00:00', '{"action": "add_venue", "name": "Symposium on Human-AI Teaming"}', 'pending', 'add_venue'),
+(23, 19, '2024-11-01 09:00:00', '{"action": "edit_venue", "seriesID": 31}', 'approved', 'edit_venue'),
+(24, 20, '2024-11-15 14:00:00', '{"action": "add_venue", "name": "Workshop on Quantum ML"}', 'rejected', 'add_venue'),
+(25, 21, '2024-12-01 10:00:00', '{"action": "add_venue", "name": "Forum on AI Safety"}', 'pending', 'add_venue');
 
 -- --------------------------------------------------------
 
