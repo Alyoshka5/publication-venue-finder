@@ -5,6 +5,8 @@ const router: express.Router = express.Router();
 
 router.get('/', collectionController.getCollections);
 
+router.post('/', collectionController.createCollection);
+
 router.get('/:id', collectionController.getCollectionInfo);
 
 router.get('/:id/venues', collectionController.getCollectionVenues);

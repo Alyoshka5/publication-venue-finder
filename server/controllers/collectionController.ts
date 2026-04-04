@@ -26,6 +26,27 @@ export const getCollections = asyncHandler(async (req: Request, res: Response) =
     }
 });
 
+export const createCollection = asyncHandler(async (req: Request, res: Response) => {
+    const { name } = req.body;
+
+    try {
+        const [result] = await pool.query(
+            `
+            INSERT 
+            INTO COLLECTION (CreatorUserID, Name)
+            VALUES (1, "${name}")
+            `
+        );
+        
+        res.json({ collectionId: (result as any).insertId });
+    } catch (err) {
+        res.status(500).json({
+            error: 'query failed',
+            details: err instanceof Error ? err.message : String(err)
+        });
+    }
+});
+
 export const getCollectionInfo = asyncHandler(async (req: Request, res: Response) => {
     try {
         const [rows] = await pool.query(

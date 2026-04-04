@@ -1,3 +1,81 @@
+.collectionForm {
+    display: flex;
+    gap: 5px;
+}
+
+.primaryButton {
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.primaryButton:hover {
+    cursor: pointer;
+    background: var(--accent-bg);
+}
+
+.secondaryButton {
+  all: unset;
+  box-sizing: border-box;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 16px;
+  font-weight: 500;
+  color: var(--text-h);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  background: var(--surface);
+  border-color: rgba(124, 58, 237, 0.25);
+  box-shadow: var(--shadow);
+  font-size: 14px;
+  font-family: var(--mono);
+  
+  @media (max-width: 1024px) {
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+
+.secondaryButton:hover {
+  color: var(--text-h);
+  background: color-mix(in srgb, var(--accent-bg) 28%, transparent);
+}
+
+.createOptionButton {
+    width: 80px;
+    justify-content: center;
+}
+
+.collectionNameInput {
+  box-sizing: border-box;
+  height: 40px;
+  width: 100%;
+  min-width: 200px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 92%, transparent);
+  color: var(--text-h);
+  outline: none;
+
+  &:focus-visible {
+    border-color: var(--accent-border);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-bg) 80%, transparent);
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
 .contentContainer {
     margin-top: 75px;
 

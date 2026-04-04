@@ -3,11 +3,15 @@ import style from './CollectionList.module.css';
 import type { Collection } from '../../models/collections';
 import { formatDate } from '../../helpers/formatting';
 import { useNavigate } from 'react-router-dom';
+import { Icon } from '@mdi/react';
+import { mdiPlus } from '@mdi/js';
 
 export default function CollectionList() {
   const [collections, setCollections] = useState<Collection[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [openCollectionForm, setOpenCollectionForm] = useState<boolean>(false);
+  const [newCollectionName, setNewCollectionName] = useState<string>('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,11 +37,68 @@ export default function CollectionList() {
     return () => controller.abort()
   }, [])
 
+  const createNewCollection = async () => {
+    if (newCollectionName.trim() === '') return;
+
+    const controller = new AbortController()
+    try {
+        setError(null)
+        const res = await fetch('/api/collections', { 
+          signal: controller.signal,
+          method: 'POST',
+          headers : {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: newCollectionName.trim()
+          })
+        })
+        if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
+        const data = (await res.json()) as { collectionId: number }
+
+        const newCollection: Collection = {
+          collectionId: data.collectionId,
+          creatorUserId: 1,
+          name: newCollectionName.trim(),
+          createdAt: new Date(),
+          venueInstanceCount: 0
+        }
+        
+        setCollections(collections => [...collections, newCollection])
+        setNewCollectionName('')
+        setOpenCollectionForm(false)
+      } catch (e) {
+        if (e instanceof DOMException && e.name === 'AbortError') return
+        setError(e instanceof Error ? e.message : String(e))
+      }
+  }
+
   return (
       <main className="main">
       <section className={`card ${style.contentContainer}`}>
         <div className="cardHeader">
           <h2>My Collections</h2>
+          <div>
+            <button className={`pill ${style.primaryButton} ${openCollectionForm ? 'hidden' : ''}`} onClick={() => setOpenCollectionForm(true)}>
+              <Icon path={mdiPlus} size={0.75} /> New Collection
+            </button>
+            <form className={`${style.collectionForm}  ${openCollectionForm ? '' : 'hidden'}`} onSubmit={(e) => {
+              e.preventDefault()
+              createNewCollection()
+            }}>
+              <input
+                className={style.collectionNameInput}
+                value={newCollectionName}
+                onChange={(e) => setNewCollectionName(e.target.value)}
+                placeholder="Collection name"
+              />
+              <button className={`pill ${style.primaryButton} ${style.createOptionButton}`}>Create</button>
+              <button type='button' className={`${style.secondaryButton} ${style.createOptionButton}`} onClick={() => {
+                setOpenCollectionForm(false)
+                setNewCollectionName('')
+              }}>Cancel</button>
+            </form>
+          </div>
         </div>
 
         {error ? (

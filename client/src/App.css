@@ -31,11 +31,15 @@
 .cardHeader {
   padding: 16px 18px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   border-bottom: 1px solid var(--border);
   text-align: left;
+}
+
+.cardHeader h2 {
+  margin: 0;
 }
 
 .meta {
@@ -155,4 +159,8 @@
   margin-top: 10px;
   font-size: 13px;
   color: var(--text);
+}
+
+.hidden {
+  display: none !important;
 }
