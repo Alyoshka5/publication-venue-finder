@@ -14,9 +14,11 @@ export const getCollections = asyncHandler(async (req: Request, res: Response) =
                 COUNT(cc.CollectionID) AS venueInstanceCount
             FROM COLLECTION c
             LEFT JOIN COLLECTION_CONTAINS cc ON cc.CollectionID = c.CollectionID
+            WHERE creatorUserId = ?
             GROUP BY c.CollectionID, c.CreatorUserID, c.Name, c.CreatedAt
             ORDER BY createdAt DESC
-            `
+            `,
+            [req.params.userId]
         );
         res.json(rows);
     } catch (err) {
@@ -37,7 +39,7 @@ export const createCollection = asyncHandler(async (req: Request, res: Response)
             INTO COLLECTION (CreatorUserID, Name)
             VALUES (?, ?)
             `,
-            [1, name]
+            [req.params.userId, name]
         );
 
         res.json({ collectionId: (result as any).insertId });

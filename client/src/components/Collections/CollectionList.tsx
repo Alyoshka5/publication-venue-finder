@@ -5,6 +5,7 @@ import { formatDate } from '../../helpers/formatting';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from '@mdi/react';
 import { mdiPlus } from '@mdi/js';
+import { useAuth } from '../Auth/useAuth';
 
 export default function CollectionList() {
   const [collections, setCollections] = useState<Collection[]>([])
@@ -13,6 +14,7 @@ export default function CollectionList() {
   const [openCollectionForm, setOpenCollectionForm] = useState<boolean>(false);
   const [newCollectionName, setNewCollectionName] = useState<string>('');
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     const controller = new AbortController()
@@ -21,7 +23,7 @@ export default function CollectionList() {
       try {
         setLoading(true)
         setError(null)
-        const res = await fetch('/api/collections', { signal: controller.signal })
+        const res = await fetch(`/api/collections/${currentUser?.userId}`, { signal: controller.signal })
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
         const data = (await res.json()) as Collection[]
         setCollections(Array.isArray(data) ? data : [])
@@ -43,7 +45,7 @@ export default function CollectionList() {
     const controller = new AbortController()
     try {
         setError(null)
-        const res = await fetch('/api/collections', { 
+        const res = await fetch(`/api/collections/${currentUser?.userId}`, { 
           signal: controller.signal,
           method: 'POST',
           headers : {
@@ -58,7 +60,7 @@ export default function CollectionList() {
 
         const newCollection: Collection = {
           collectionId: data.collectionId,
-          creatorUserId: 1,
+          creatorUserId: currentUser?.userId || 0,
           name: newCollectionName.trim(),
           createdAt: new Date(),
           venueInstanceCount: 0
