@@ -63,8 +63,8 @@ export default function CollectionList() {
           createdAt: new Date(),
           venueInstanceCount: 0
         }
-        
-        setCollections(collections => [...collections, newCollection])
+
+        setCollections(collections => [newCollection, ...collections])
         setNewCollectionName('')
         setOpenCollectionForm(false)
       } catch (e) {

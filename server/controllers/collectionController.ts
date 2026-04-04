@@ -15,6 +15,7 @@ export const getCollections = asyncHandler(async (req: Request, res: Response) =
             FROM COLLECTION c
             LEFT JOIN COLLECTION_CONTAINS cc ON cc.CollectionID = c.CollectionID
             GROUP BY c.CollectionID, c.CreatorUserID, c.Name, c.CreatedAt
+            ORDER BY createdAt DESC
             `
         );
         res.json(rows);
@@ -37,7 +38,7 @@ export const createCollection = asyncHandler(async (req: Request, res: Response)
             VALUES (1, "${name}")
             `
         );
-        
+
         res.json({ collectionId: (result as any).insertId });
     } catch (err) {
         res.status(500).json({
