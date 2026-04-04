@@ -138,11 +138,6 @@ export default function VenueList({
         )}
       </section>
 
-      <footer className="footer">
-        <span className="muted">
-          Query: <code>WHERE Reviewing = FALSE AND Published = FALSE</code> with optional topic filtering (limited to 50 rows)
-        </span>
-      </footer>
     </main>
   );
 }

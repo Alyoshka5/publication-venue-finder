@@ -21,10 +21,23 @@ export default function NavBar() {
               className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
             >Find Venues</NavLink>
             {ready && currentUser?.role === 'admin' ? (
+              <>
+                <NavLink
+                  to='/admin'
+                  end
+                  className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
+                >Admin Dashboard</NavLink>
+                <NavLink
+                  to='/admin/review'
+                  className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
+                >Review Requests</NavLink>
+              </>
+            ) : null}
+            {ready && currentUser?.role === 'organizer' ? (
               <NavLink
-                to='/admin'
+                to='/organizer/submit'
                 className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
-              >Admin Dashboard</NavLink>
+              >Submit Venue</NavLink>
             ) : null}
             {ready && currentUser?.role === 'researcher' ? (
               <NavLink

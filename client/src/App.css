@@ -1,11 +1,10 @@
 .page {
-  width: 1200px;
-  max-width: 100%;
+  width: 100%;
+  max-width: none;
   display: flex;
   flex-direction: column;
   min-height: 100svh;
-  margin-left: 220px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 

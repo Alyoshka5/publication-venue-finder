@@ -9,6 +9,8 @@ import ProfilePage from './components/Profile/ProfilePage'
 import { Routes, Route } from 'react-router-dom';
 import CollectionDetails from './components/Collections/CollectionDetails';
 import CollectionList from './components/Collections/CollectionList';
+import OrganizerSubmissionPage from './components/Organizer/OrganizerSubmissionPage';
+import AdminReviewPage from './components/Admin/AdminReviewPage';
 
 export default function App() {
   return (
@@ -24,6 +26,8 @@ export default function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/review" element={<AdminReviewPage />} />
+        <Route path="/organizer/submit" element={<OrganizerSubmissionPage />} />
       </Routes>
     </>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './CollectionList.module.css';
 import type { Collection } from '../../models/collections';
 import { formatDate } from '../../helpers/formatting';

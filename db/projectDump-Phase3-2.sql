@@ -68,81 +68,81 @@ CREATE TABLE VENUE_SERIES (
 -- Dumping data for table `VENUE_SERIES`
 --
 
-INSERT INTO `VENUE_SERIES` (`OrgID`, `Name`, `Acronym`, `Description`, `ActiveFlag`) VALUES
+INSERT INTO `VENUE_SERIES` (`SeriesID`, `OrgID`, `Name`, `Acronym`, `Description`, `ActiveFlag`) VALUES
 -- IEEE
-(1, 'International Conference on Software Engineering', 'ICSE', 'Premier software engineering conference', TRUE),
-(1, 'IEEE Symposium on Security and Privacy', 'S&P', 'Top venue for security and privacy research', TRUE),
-(1, 'IEEE International Conference on Computer Communications', 'INFOCOM', 'Leading networking and communications conference', TRUE),
-(1, 'IEEE Conference on Computer Vision and Pattern Recognition', 'CVPR', 'Premier computer vision conference', TRUE),
-(1, 'IEEE International Conference on Data Mining', 'ICDM', 'Leading data mining conference', TRUE),
-(1, 'International Symposium on Computer Architecture', 'ISCA', 'Premier computer architecture conference', TRUE),
-(1, 'IEEE/ACM International Symposium on Microarchitecture', 'MICRO', 'Top microarchitecture conference', TRUE),
-(1, 'IEEE International Conference on Affective Computing and Intelligent Interaction', 'ACII', 'Premier affective computing conference', TRUE),
-(1, 'IEEE International Conference on Robotics and Automation', 'ICRA', 'Largest robotics conference', TRUE),
-(1, 'IEEE/RSJ International Conference on Intelligent Robots and Systems', 'IROS', 'Leading intelligent robots conference', TRUE),
-(1, 'IEEE International Conference on Acoustics, Speech and Signal Processing', 'ICASSP', 'Premier speech and signal processing conference', TRUE),
-(1, 'IEEE International Conference on Computer Vision', 'ICCV', 'Top computer vision conference, held biennially', TRUE),
-(1, 'European Conference on Computer Vision', 'ECCV', 'Leading European computer vision conference', TRUE),
-(1, 'IEEE International Conference on Image Processing', 'ICIP', 'Leading image processing conference', TRUE),
+(1, 1, 'International Conference on Software Engineering', 'ICSE', 'Premier software engineering conference', TRUE),
+(2, 1, 'IEEE Symposium on Security and Privacy', 'S&P', 'Top venue for security and privacy research', TRUE),
+(3, 1, 'IEEE International Conference on Computer Communications', 'INFOCOM', 'Leading networking and communications conference', TRUE),
+(4, 1, 'IEEE Conference on Computer Vision and Pattern Recognition', 'CVPR', 'Premier computer vision conference', TRUE),
+(5, 1, 'IEEE International Conference on Data Mining', 'ICDM', 'Leading data mining conference', TRUE),
+(26, 1, 'International Symposium on Computer Architecture', 'ISCA', 'Premier computer architecture conference', TRUE),
+(27, 1, 'IEEE/ACM International Symposium on Microarchitecture', 'MICRO', 'Top microarchitecture conference', TRUE),
+(31, 1, 'IEEE International Conference on Affective Computing and Intelligent Interaction', 'ACII', 'Premier affective computing conference', TRUE),
+(33, 1, 'IEEE International Conference on Robotics and Automation', 'ICRA', 'Largest robotics conference', TRUE),
+(34, 1, 'IEEE/RSJ International Conference on Intelligent Robots and Systems', 'IROS', 'Leading intelligent robots conference', TRUE),
+(36, 1, 'IEEE International Conference on Acoustics, Speech and Signal Processing', 'ICASSP', 'Premier speech and signal processing conference', TRUE),
+(38, 1, 'IEEE International Conference on Computer Vision', 'ICCV', 'Top computer vision conference, held biennially', TRUE),
+(39, 1, 'European Conference on Computer Vision', 'ECCV', 'Leading European computer vision conference', TRUE),
+(41, 1, 'IEEE International Conference on Image Processing', 'ICIP', 'Leading image processing conference', TRUE),
 -- ACM
-(2, 'ACM Special Interest Group on Data Communication', 'SIGCOMM', 'Premier data networking conference', TRUE),
-(2, 'ACM SIGPLAN Conference on Programming Language Design and Implementation', 'PLDI', 'Top programming languages conference', TRUE),
-(2, 'ACM Symposium on Theory of Computing', 'STOC', 'Premier theory of computing conference', TRUE),
-(2, 'ACM Conference on Computer and Communications Security', 'CCS', 'Leading security conference', TRUE),
-(2, 'ACM SIGMOD International Conference on Management of Data', 'SIGMOD', 'Premier database conference', TRUE),
-(2, 'ACM Symposium on Operating Systems Principles', 'SOSP', 'Top operating systems conference', TRUE),
-(2, 'ACM CHI Conference on Human Factors in Computing Systems', 'CHI', 'Premier HCI conference', TRUE),
-(2, 'ACM SIGPLAN Symposium on Principles of Programming Languages', 'POPL', 'Leading PL theory conference', TRUE),
-(2, 'ACM International Conference on Architectural Support for Programming Languages and Operating Systems', 'ASPLOS', 'Top systems and architecture conference', TRUE),
-(2, 'ACM SIGKDD Conference on Knowledge Discovery and Data Mining', 'KDD', 'Premier data mining and KDD conference', TRUE),
-(2, 'Conference on Neural Information Processing Systems', 'NeurIPS', 'Premier ML and AI conference', TRUE),
-(2, 'International Conference on Machine Learning', 'ICML', 'Leading machine learning conference', TRUE),
-(2, 'International Conference on Learning Representations', 'ICLR', 'Top deep learning conference', TRUE),
-(2, 'International Conference on Very Large Data Bases', 'VLDB', 'Leading database systems conference', TRUE),
-(2, 'ACM SIGCSE Technical Symposium on Computer Science Education', 'SIGCSE', 'Premier CS education conference', TRUE),
-(2, 'ACM SIGMOD-SIGACT-SIGART Symposium on Principles of Database Systems', 'PODS', 'Leading database theory conference', TRUE),
-(2, 'ACM/IEEE International Conference on Human-Robot Interaction', 'HRI', 'Premier human-robot interaction conference', TRUE),
+(6, 2, 'ACM Special Interest Group on Data Communication', 'SIGCOMM', 'Premier data networking conference', TRUE),
+(7, 2, 'ACM SIGPLAN Conference on Programming Language Design and Implementation', 'PLDI', 'Top programming languages conference', TRUE),
+(8, 2, 'ACM Symposium on Theory of Computing', 'STOC', 'Premier theory of computing conference', TRUE),
+(9, 2, 'ACM Conference on Computer and Communications Security', 'CCS', 'Leading security conference', TRUE),
+(10, 2, 'ACM SIGMOD International Conference on Management of Data', 'SIGMOD', 'Premier database conference', TRUE),
+(11, 2, 'ACM Symposium on Operating Systems Principles', 'SOSP', 'Top operating systems conference', TRUE),
+(12, 2, 'ACM CHI Conference on Human Factors in Computing Systems', 'CHI', 'Premier HCI conference', TRUE),
+(13, 2, 'ACM SIGPLAN Symposium on Principles of Programming Languages', 'POPL', 'Leading PL theory conference', TRUE),
+(14, 2, 'ACM International Conference on Architectural Support for Programming Languages and Operating Systems', 'ASPLOS', 'Top systems and architecture conference', TRUE),
+(15, 2, 'ACM SIGKDD Conference on Knowledge Discovery and Data Mining', 'KDD', 'Premier data mining and KDD conference', TRUE),
+(22, 2, 'Conference on Neural Information Processing Systems', 'NeurIPS', 'Premier ML and AI conference', TRUE),
+(23, 2, 'International Conference on Machine Learning', 'ICML', 'Leading machine learning conference', TRUE),
+(24, 2, 'International Conference on Learning Representations', 'ICLR', 'Top deep learning conference', TRUE),
+(25, 2, 'International Conference on Very Large Data Bases', 'VLDB', 'Leading database systems conference', TRUE),
+(29, 2, 'ACM SIGCSE Technical Symposium on Computer Science Education', 'SIGCSE', 'Premier CS education conference', TRUE),
+(30, 2, 'ACM SIGMOD-SIGACT-SIGART Symposium on Principles of Database Systems', 'PODS', 'Leading database theory conference', TRUE),
+(35, 2, 'ACM/IEEE International Conference on Human-Robot Interaction', 'HRI', 'Premier human-robot interaction conference', TRUE),
 -- USENIX
-(5, 'USENIX Symposium on Operating Systems Design and Implementation', 'OSDI', 'Top systems conference', TRUE),
-(5, 'USENIX Security Symposium', 'USENIX Security', 'Leading security conference', TRUE),
-(5, 'USENIX Symposium on Networked Systems Design and Implementation', 'NSDI', 'Top networked systems conference', TRUE),
-(5, 'USENIX Annual Technical Conference', 'ATC', 'Broad systems research conference', TRUE),
+(16, 5, 'USENIX Symposium on Operating Systems Design and Implementation', 'OSDI', 'Top systems conference', TRUE),
+(17, 5, 'USENIX Security Symposium', 'USENIX Security', 'Leading security conference', TRUE),
+(18, 5, 'USENIX Symposium on Networked Systems Design and Implementation', 'NSDI', 'Top networked systems conference', TRUE),
+(19, 5, 'USENIX Annual Technical Conference', 'ATC', 'Broad systems research conference', TRUE),
 -- AAAI
-(6, 'AAAI Conference on Artificial Intelligence', 'AAAI', 'Premier broad AI conference', TRUE),
-(6, 'Innovative Applications of Artificial Intelligence', 'IAAI', 'Applied AI conference', TRUE),
+(20, 6, 'AAAI Conference on Artificial Intelligence', 'AAAI', 'Premier broad AI conference', TRUE),
+(21, 6, 'Innovative Applications of Artificial Intelligence', 'IAAI', 'Applied AI conference', TRUE),
 -- ISOC
-(7, 'Network and Distributed System Security Symposium', 'NDSS', 'Top network security conference', TRUE),
+(28, 7, 'Network and Distributed System Security Symposium', 'NDSS', 'Top network security conference', TRUE),
 -- IACR
-(8, 'International Cryptology Conference', 'CRYPTO', 'Premier cryptography conference', TRUE),
-(8, 'European Cryptology Conference', 'EUROCRYPT', 'Leading European cryptography conference', TRUE),
+(42, 8, 'International Cryptology Conference', 'CRYPTO', 'Premier cryptography conference', TRUE),
+(43, 8, 'European Cryptology Conference', 'EUROCRYPT', 'Leading European cryptography conference', TRUE),
 -- ACL
-(10, 'Annual Meeting of the Association for Computational Linguistics', 'ACL', 'Premier NLP conference', TRUE),
-(10, 'Conference on Empirical Methods in Natural Language Processing', 'EMNLP', 'Top empirical NLP conference', TRUE),
-(10, 'North American Chapter of the ACL', 'NAACL', 'Leading North American NLP conference', TRUE),
+(44, 10, 'Annual Meeting of the Association for Computational Linguistics', 'ACL', 'Premier NLP conference', TRUE),
+(45, 10, 'Conference on Empirical Methods in Natural Language Processing', 'EMNLP', 'Top empirical NLP conference', TRUE),
+(46, 10, 'North American Chapter of the ACL', 'NAACL', 'Leading North American NLP conference', TRUE),
 -- Interspeech (ISCA org - need OrgID)
-(11, 'Interspeech', 'INTERSPEECH', 'Premier speech processing conference', TRUE),
+(37, 11, 'Interspeech', 'INTERSPEECH', 'Premier speech processing conference', TRUE),
 -- Journals (CS)
-(2, 'Communications of the ACM', 'CACM', 'Flagship ACM publication covering all areas of CS', TRUE),
-(4, 'Journal of Artificial Intelligence Research', 'JAIR', 'Open-access journal covering all areas of AI', TRUE),
-(1, 'IEEE Transactions on Neural Networks and Learning Systems', 'TNNLS', 'IEEE journal on neural networks and ML', TRUE),
-(2, 'ACM Transactions on Programming Languages and Systems', 'TOPLAS', 'ACM journal on PL theory and implementation', TRUE),
-(4, 'Information and Computation', 'IC', 'Elsevier journal on theoretical CS and logic', TRUE),
+(50, 2, 'Communications of the ACM', 'CACM', 'Flagship ACM publication covering all areas of CS', TRUE),
+(51, 4, 'Journal of Artificial Intelligence Research', 'JAIR', 'Open-access journal covering all areas of AI', TRUE),
+(52, 1, 'IEEE Transactions on Neural Networks and Learning Systems', 'TNNLS', 'IEEE journal on neural networks and ML', TRUE),
+(53, 2, 'ACM Transactions on Programming Languages and Systems', 'TOPLAS', 'ACM journal on PL theory and implementation', TRUE),
+(54, 4, 'Information and Computation', 'IC', 'Elsevier journal on theoretical CS and logic', TRUE),
 -- Journals (Cog Sci / Neuro / Nature)
-(15, 'Nature', 'Nature', 'Premier multidisciplinary science journal', TRUE),
-(15, 'Nature Human Behaviour', 'NHB', 'Nature journal covering human behaviour research', TRUE),
-(15, 'Nature Neuroscience', 'NatNeuro', 'Nature journal on neuroscience', TRUE),
-(16, 'Cognitive Science', 'CogSci-J', 'Official journal of the Cognitive Science Society', TRUE),
-(16, 'Neural Computation', 'NeuralComp', 'MIT Press journal on computational neuroscience', TRUE),
+(55, 15, 'Nature', 'Nature', 'Premier multidisciplinary science journal', TRUE),
+(56, 15, 'Nature Human Behaviour', 'NHB', 'Nature journal covering human behaviour research', TRUE),
+(57, 15, 'Nature Neuroscience', 'NatNeuro', 'Nature journal on neuroscience', TRUE),
+(58, 16, 'Cognitive Science', 'CogSci-J', 'Official journal of the Cognitive Science Society', TRUE),
+(59, 16, 'Neural Computation', 'NeuralComp', 'MIT Press journal on computational neuroscience', TRUE),
 -- Conferences (Cog Sci / Neuro / Psych)
-(13, 'Annual Conference of the Cognitive Science Society', 'CogSci', 'Premier interdisciplinary cognitive science conference', TRUE),
-(14, 'Annual Meeting of the Cognitive Neuroscience Society', 'CNS', 'Premier cognitive neuroscience conference', TRUE),
-(12, 'APS Annual Convention', 'APS', 'Premier psychological science convention', TRUE),
-(14, 'Conference on Cognitive Computational Neuroscience', 'CCN', 'Computational approaches to brain and cognition', TRUE),
-(1, 'IEEE Conference on Virtual Reality and 3D User Interfaces', 'IEEE VR', 'Premier conference on virtual and augmented reality', TRUE),
-(2, 'ACM SIGGRAPH Conference on Computer Graphics and Interactive Techniques', 'SIGGRAPH', 'Premier computer graphics and interactive techniques conference', TRUE),
-(1, 'IEEE International Conference on Quantum Computing and Engineering', 'IEEE Quantum Week', 'Leading quantum computing conference', TRUE),
-(1, 'IEEE International Conference on Bioinformatics and Biomedicine', 'BIBM', 'Premier bioinformatics and biomedicine conference', TRUE),
-(2, 'ACM Symposium on User Interface Software and Technology', 'UIST', 'Leading HCI and user interface conference', TRUE);
+(60, 13, 'Annual Conference of the Cognitive Science Society', 'CogSci', 'Premier interdisciplinary cognitive science conference', TRUE),
+(61, 14, 'Annual Meeting of the Cognitive Neuroscience Society', 'CNS', 'Premier cognitive neuroscience conference', TRUE),
+(62, 12, 'APS Annual Convention', 'APS', 'Premier psychological science convention', TRUE),
+(63, 14, 'Conference on Cognitive Computational Neuroscience', 'CCN', 'Computational approaches to brain and cognition', TRUE),
+(32, 1, 'IEEE Conference on Virtual Reality and 3D User Interfaces', 'IEEE VR', 'Premier conference on virtual and augmented reality', TRUE),
+(40, 2, 'ACM SIGGRAPH Conference on Computer Graphics and Interactive Techniques', 'SIGGRAPH', 'Premier computer graphics and interactive techniques conference', TRUE),
+(47, 1, 'IEEE International Conference on Quantum Computing and Engineering', 'IEEE Quantum Week', 'Leading quantum computing conference', TRUE),
+(48, 1, 'IEEE International Conference on Bioinformatics and Biomedicine', 'BIBM', 'Premier bioinformatics and biomedicine conference', TRUE),
+(49, 2, 'ACM Symposium on User Interface Software and Technology', 'UIST', 'Leading HCI and user interface conference', TRUE);
 
 -- --------------------------------------------------------
 
@@ -165,69 +165,69 @@ CREATE TABLE CONFERENCE_SERIES (
 -- Dumping data for table `CONFERENCE_SERIES`
 --
 
-INSERT INTO `CONFERENCE_SERIES` (`TypicalMonth`, `TypicalCityPolicy`, `Tier`) VALUES
+INSERT INTO `CONFERENCE_SERIES` (`SeriesID`, `TypicalMonth`, `TypicalCityPolicy`, `Tier`) VALUES
 -- IEEE
-(4, 'Rotating international cities', '1'),      -- ICSE: April
-(5, 'San Francisco, CA (fixed)', '1'),           -- S&P: May
-(5, 'Rotating international cities', '1'),       -- INFOCOM: May
-(6, 'Rotating US cities', '1'),                  -- CVPR: June
-(11, 'Rotating international cities', '2'),      -- ICDM: November
-(6, 'Rotating international cities', '1'),      -- ISCA: June
-(10, 'Rotating international cities', '1'),     -- MICRO: October
-(9, 'Rotating international cities', '3'),      -- ACII: September
-(5, 'Rotating international cities', '1'),      -- ICRA: May
-(10, 'Rotating international cities', '1'),     -- IROS: October
-(4, 'Rotating international cities', '2'),      -- ICASSP: April
-(10, 'Rotating international cities', '1'),     -- ICCV: October (biennial)
-(9, 'Rotating European cities', '1'),           -- ECCV: September (biennial)
-(9, 'Rotating international cities', '2'),      -- ICIP: September
+(1, 4, 'Rotating international cities', '1'),      -- ICSE: April
+(2, 5, 'San Francisco, CA (fixed)', '1'),           -- S&P: May
+(3, 5, 'Rotating international cities', '1'),       -- INFOCOM: May
+(4, 6, 'Rotating US cities', '1'),                  -- CVPR: June
+(5, 11, 'Rotating international cities', '2'),      -- ICDM: November
+(26, 6, 'Rotating international cities', '1'),      -- ISCA: June
+(27, 10, 'Rotating international cities', '1'),     -- MICRO: October
+(31, 9, 'Rotating international cities', '3'),      -- ACII: September
+(33, 5, 'Rotating international cities', '1'),      -- ICRA: May
+(34, 10, 'Rotating international cities', '1'),     -- IROS: October
+(36, 4, 'Rotating international cities', '2'),      -- ICASSP: April
+(38, 10, 'Rotating international cities', '1'),     -- ICCV: October (biennial)
+(39, 9, 'Rotating European cities', '1'),           -- ECCV: September (biennial)
+(41, 9, 'Rotating international cities', '2'),      -- ICIP: September
 -- ACM
-(8, 'Rotating international cities', '1'),       -- SIGCOMM: August
-(6, 'Rotating international cities', '1'),       -- PLDI: June
-(6, 'Rotating international cities', '1'),       -- STOC: June
-(11, 'Rotating international cities', '1'),      -- CCS: November
-(6, 'Rotating international cities', '1'),      -- SIGMOD: June
-(10, 'Rotating international cities', '1'),     -- SOSP: October (biennial)
-(4, 'Rotating international cities', '1'),      -- CHI: April
-(1, 'Rotating international cities', '1'),      -- POPL: January
-(3, 'Rotating international cities', '1'),      -- ASPLOS: March
-(8, 'Rotating international cities', '1'),      -- KDD: August
-(12, 'New Orleans, LA / Vancouver, BC', '1'),   -- NeurIPS: December
-(7, 'Rotating international cities', '1'),      -- ICML: July
-(4, 'Rotating international cities', '1'),      -- ICLR: April
-(8, 'Rotating international cities', '1'),      -- VLDB: August
-(3, 'Rotating US/Canada cities', '2'),          -- SIGCSE: March
-(6, 'Rotating international cities', '1'),      -- PODS: June
-(3, 'Rotating international cities', '2'),      -- HRI: March
+(6, 8, 'Rotating international cities', '1'),       -- SIGCOMM: August
+(7, 6, 'Rotating international cities', '1'),       -- PLDI: June
+(8, 6, 'Rotating international cities', '1'),       -- STOC: June
+(9, 11, 'Rotating international cities', '1'),      -- CCS: November
+(10, 6, 'Rotating international cities', '1'),      -- SIGMOD: June
+(11, 10, 'Rotating international cities', '1'),     -- SOSP: October (biennial)
+(12, 4, 'Rotating international cities', '1'),      -- CHI: April
+(13, 1, 'Rotating international cities', '1'),      -- POPL: January
+(14, 3, 'Rotating international cities', '1'),      -- ASPLOS: March
+(15, 8, 'Rotating international cities', '1'),      -- KDD: August
+(22, 12, 'New Orleans, LA / Vancouver, BC', '1'),   -- NeurIPS: December
+(23, 7, 'Rotating international cities', '1'),      -- ICML: July
+(24, 4, 'Rotating international cities', '1'),      -- ICLR: April
+(25, 8, 'Rotating international cities', '1'),      -- VLDB: August
+(29, 3, 'Rotating US/Canada cities', '2'),          -- SIGCSE: March
+(30, 6, 'Rotating international cities', '1'),      -- PODS: June
+(35, 3, 'Rotating international cities', '2'),      -- HRI: March
 -- USENIX
-(11, 'Rotating US cities', '1'),                -- OSDI: November (biennial)
-(8, 'Rotating US cities', '1'),                 -- USENIX Security: August
-(4, 'Rotating US cities', '1'),                 -- NSDI: April
-(7, 'Rotating US cities', '2'),                 -- ATC: July
+(16, 11, 'Rotating US cities', '1'),                -- OSDI: November (biennial)
+(17, 8, 'Rotating US cities', '1'),                 -- USENIX Security: August
+(18, 4, 'Rotating US cities', '1'),                 -- NSDI: April
+(19, 7, 'Rotating US cities', '2'),                 -- ATC: July
 -- AAAI
-(2, 'Rotating US cities', '1'),                 -- AAAI: February
-(2, 'Rotating US cities', '3'),                 -- IAAI: February
+(20, 2, 'Rotating US cities', '1'),                 -- AAAI: February
+(21, 2, 'Rotating US cities', '3'),                 -- IAAI: February
 -- ISOC
-(2, 'San Diego, CA (fixed)', '1'),              -- NDSS: February
+(28, 2, 'San Diego, CA (fixed)', '1'),              -- NDSS: February
 -- IACR
-(8, 'Rotating international cities', '1'),      -- CRYPTO: August
-(5, 'Rotating European cities', '1'),           -- EUROCRYPT: May
+(42, 8, 'Rotating international cities', '1'),      -- CRYPTO: August
+(43, 5, 'Rotating European cities', '1'),           -- EUROCRYPT: May
 -- ACL
-(7, 'Rotating international cities', '1'),      -- ACL: July
-(11, 'Rotating international cities', '1'),     -- EMNLP: November
-(6, 'Rotating North American cities', '2'),     -- NAACL: June
+(44, 7, 'Rotating international cities', '1'),      -- ACL: July
+(45, 11, 'Rotating international cities', '1'),     -- EMNLP: November
+(46, 6, 'Rotating North American cities', '2'),     -- NAACL: June
 -- ISCA
-(9, 'Rotating international cities', '2'),      -- INTERSPEECH: September
+(37, 9, 'Rotating international cities', '2'),      -- INTERSPEECH: September
 -- COGS-type
-(7, 'Rotating international cities', '3'),   -- CogSci: July
-(3, 'Rotating US/Canada cities', '3'),        -- CNS: March/April
-(5, 'Rotating international cities', '3'),    -- APS: May
-(8, 'Rotating international cities', '3'),    -- CCN: August
-(3, 'Rotating international cities', '2'),    -- IEEE VR: March
-(8, 'Rotating international cities', '1'),    -- SIGGRAPH: August
-(9, 'Denver, CO (fixed)', '3'),               -- IEEE Quantum Week: September
-(11, 'Rotating international cities', '3'),   -- BIBM: November
-(10, 'Rotating international cities', '1');   -- UIST: October
+(60, 7, 'Rotating international cities', '3'),   -- CogSci: July
+(61, 3, 'Rotating US/Canada cities', '3'),        -- CNS: March/April
+(62, 5, 'Rotating international cities', '3'),    -- APS: May
+(63, 8, 'Rotating international cities', '3'),    -- CCN: August
+(32, 3, 'Rotating international cities', '2'),    -- IEEE VR: March
+(40, 8, 'Rotating international cities', '1'),    -- SIGGRAPH: August
+(47, 9, 'Denver, CO (fixed)', '3'),               -- IEEE Quantum Week: September
+(48, 11, 'Rotating international cities', '3'),   -- BIBM: November
+(49, 10, 'Rotating international cities', '1');   -- UIST: October
 
 -- --------------------------------------------------------
 
