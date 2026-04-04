@@ -151,3 +151,22 @@ export const deleteCollection = asyncHandler(async (req: Request, res: Response)
         });
     }
 });
+
+export const removeVenueFromCollection = asyncHandler(async (req: Request, res: Response) => {
+    const { venueSeriesId, venueYear } = req.body;
+
+    try {
+        const [result] = await pool.query(
+            `DELETE
+            FROM COLLECTION_CONTAINS
+            WHERE CollectionID = ? AND SeriesID = ? AND Year = ?`,
+            [req.params.id, venueSeriesId, venueYear]
+        );
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({
+            error: 'query failed',
+            details: err instanceof Error ? err.message : String(err)
+        });
+    }
+});

@@ -178,3 +178,13 @@
   color: var(--text-h);
   font-weight: 500;
 }
+
+.removeVenueButtonCellHeader {
+  width: 0;
+}
+
+.removeVenueButtonCell {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  align-content: center;
+}

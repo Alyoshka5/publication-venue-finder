@@ -6,7 +6,7 @@ import type { Venue } from '../../models/venues';
 import type { Collection } from '../../models/collections';
 import { Link } from 'react-router-dom';
 import { Icon } from '@mdi/react';
-import { mdiChevronLeft, mdiSquareEditOutline, mdiTrashCanOutline } from '@mdi/js';
+import { mdiChevronLeft, mdiSquareEditOutline, mdiTrashCanOutline, mdiMinusCircleOutline } from '@mdi/js';
 
 export default function CollectionDetails() {
 	const [venues, setVenues] = useState<Venue[]>([]);
@@ -132,6 +132,30 @@ export default function CollectionDetails() {
       }
   }
 
+  const removeVenueFromCollection = async (venueSeriesId: number, venueYear: number) => {
+    const controller = new AbortController()
+
+    try {
+      setError(null)
+      const res = await fetch(`/api/collections/${id}/venues`, {
+        signal: controller.signal,
+        method: 'DELETE',
+        headers : {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          venueSeriesId: venueSeriesId,
+          venueYear: venueYear
+        })
+      })
+      if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
+      setVenues(venues => venues.filter(venue => venue.seriesId !== venueSeriesId || venue.year !== venueYear))
+    } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') return
+      setError(e instanceof Error ? e.message : String(e))
+    }
+  }
+
   return (
       <main className="main">
 			<div className={style.returnLinkContainer}>
@@ -194,6 +218,7 @@ export default function CollectionDetails() {
             <table className="table">
               <thead>
                 <tr>
+                  <th className={style.removeVenueButtonCellHeader}></th>
                   <th>Venue</th>
                   <th>Org</th>
                   <th>Year</th>
@@ -217,6 +242,11 @@ export default function CollectionDetails() {
                 ) : (
                   venues.map((v) => (
                     <tr key={`${v.seriesId}-${v.year}`} className={style.venueRow}>
+                      <td className={style.removeVenueButtonCell}>
+                        <button className={style.modificationButton} onClick={() => removeVenueFromCollection(v.seriesId, v.year)}>
+                          <Icon path={mdiMinusCircleOutline} size={1}/>
+                        </button>
+                      </td>
                       <td>
                         <div className={style.venueCell}>
                           <div className={style.venueTop}>

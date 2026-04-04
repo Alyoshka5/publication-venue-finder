@@ -15,4 +15,6 @@ router.delete('/:id', collectionController.deleteCollection);
 
 router.get('/:id/venues', collectionController.getCollectionVenues);
 
+router.delete('/:id/venues', collectionController.removeVenueFromCollection);
+
 export default router;
