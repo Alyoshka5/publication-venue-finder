@@ -23,7 +23,7 @@ export default function CollectionList() {
       try {
         setLoading(true)
         setError(null)
-        const res = await fetch(`/api/collections/${currentUser?.userId}`, { signal: controller.signal })
+        const res = await fetch(`/api/collections/user/${currentUser?.userId}`, { signal: controller.signal })
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
         const data = (await res.json()) as Collection[]
         setCollections(Array.isArray(data) ? data : [])
@@ -45,7 +45,7 @@ export default function CollectionList() {
     const controller = new AbortController()
     try {
         setError(null)
-        const res = await fetch(`/api/collections/${currentUser?.userId}`, { 
+        const res = await fetch(`/api/collections/user/${currentUser?.userId}`, { 
           signal: controller.signal,
           method: 'POST',
           headers : {

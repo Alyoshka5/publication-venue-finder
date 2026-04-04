@@ -3,9 +3,9 @@ import * as collectionController from '../controllers/collectionController.ts';
 
 const router: express.Router = express.Router();
 
-router.get('/:userId', collectionController.getCollections);
+router.get('/user/:userId', collectionController.getCollections);
 
-router.post('/:userId', collectionController.createCollection);
+router.post('/user/:userId', collectionController.createCollection);
 
 router.get('/:id', collectionController.getCollectionInfo);
 
