@@ -9,6 +9,8 @@ router.post('/:userId', collectionController.createCollection);
 
 router.get('/:id', collectionController.getCollectionInfo);
 
+router.delete('/:id', collectionController.deleteCollection);
+
 router.get('/:id/venues', collectionController.getCollectionVenues);
 
 export default router;

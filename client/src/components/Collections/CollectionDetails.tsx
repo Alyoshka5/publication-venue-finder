@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import style from './CollectionDetails.module.css';
 import { formatDate, formatLocation } from '../../helpers/formatting';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import type { Venue } from '../../models/venues';
 import type { Collection } from '../../models/collections';
 import { Link } from 'react-router-dom';
 import { Icon } from '@mdi/react';
-import { mdiChevronLeft } from '@mdi/js';
+import { mdiChevronLeft, mdiSquareEditOutline, mdiTrashCanOutline } from '@mdi/js';
 
 export default function CollectionDetails() {
 	const [venues, setVenues] = useState<Venue[]>([]);
@@ -14,6 +14,7 @@ export default function CollectionDetails() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 	const { id } = useParams()
+  const navigate = useNavigate();
 	
 	useEffect(() => {
 		const controller = new AbortController()
@@ -84,6 +85,23 @@ export default function CollectionDetails() {
     return () => controller.abort()
   }, [])
 
+  const deleteCollection = async () => {
+    const controller = new AbortController()
+
+    try {
+        setError(null)
+        const res = await fetch(`/api/collections/${id}`, {
+          signal: controller.signal,
+          method: 'DELETE'
+        })
+        if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
+        navigate('/collections')
+      } catch (e) {
+        if (e instanceof DOMException && e.name === 'AbortError') return
+        setError(e instanceof Error ? e.message : String(e))
+      }
+  }
+
   return (
       <main className="main">
 			<div className={style.returnLinkContainer}>
@@ -105,6 +123,9 @@ export default function CollectionDetails() {
 							</span>
 						</div>
 					</div>
+          <div className={style.modificationButtonsContainer}>
+            <button className={style.modificationButton} onClick={deleteCollection}><Icon path={mdiTrashCanOutline} size={1}/></button>
+          </div>
 				</div>
 			</header>
       <section className={`card ${style.contentContainer}`}>

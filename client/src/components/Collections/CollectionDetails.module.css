@@ -86,6 +86,28 @@
   font-size: 10px;
 }
 
+.modificationButtonsContainer {
+  display: flex;
+  gap: 3px;
+}
+
+.modificationButton {
+  color: var(--accent-border);
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modificationButton:hover {
+  cursor: pointer;
+  background: color-mix(in srgb, var(--accent-bg) 28%, transparent);
+}
+
 .venueRow:hover {
     cursor: pointer;
 }
