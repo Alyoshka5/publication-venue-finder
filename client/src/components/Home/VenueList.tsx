@@ -1,18 +1,42 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Venue } from '../../models/venues';
 import style from './VenueList.module.css';
-import { formatDate, formatLocation, formatTopics } from '../../helpers/formatting';
+
+const formatDate = (value: string | null) => {
+  if (!value) return '—'
+  const d = new Date(value)
+  if (Number.isNaN(d.getTime())) return value
+  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' })
+}
+
+const formatLocation = (city: string, country: string) => {
+  if (!city && !country) return '—'
+  if (!city) return country
+  if (!country) return city
+  return `${city}, ${country}`
+}
+
+const formatTopics = (value: string | null) => {
+  if (!value) return []
+  return value
+    .split(',')
+    .map((topic) => topic.trim())
+    .filter(Boolean)
+}
 
 export default function VenueList({
   query,
-  selectedTopicId
+  selectedTopicId,
+  userId
 }: {
   query: string
   selectedTopicId: string
+  userId: number | null
 }) {
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [recScores, setRecScores] = useState<Map<string, number>>(new Map())
 
   useEffect(() => {
     const controller = new AbortController()
@@ -40,20 +64,52 @@ export default function VenueList({
     return () => controller.abort()
   }, [selectedTopicId])
 
+  useEffect(() => {
+    if (!userId) {
+      setRecScores(new Map())
+      return
+    }
+    const controller = new AbortController()
+    const run = async() => {
+      try {
+        const res = await fetch(`/api/recommendations?userId=${userId}`, { signal: controller.signal })
+        if (!res.ok) return
+        const json = await res.json()
+        const data = (json.recommendations ?? json) as { seriesId: number; year: number; score: number }[]
+        const map = new Map<string, number>()
+        data.forEach(({ seriesId, year, score }) => map.set(`${seriesId}-${year}`, score))
+        setRecScores(map)
+      } catch (e) {
+        if (e instanceof DOMException && e.name == 'AbortError') return
+      }
+    }
+    run()
+    return () => controller.abort()
+  }, [userId])
+
   const filteredVenues = useMemo(() => {
     const q = query.trim().toLowerCase()
-    if (!q) return venues
-    return venues.filter((v) => {
-      return (
-        (v.acronym ?? '').toLowerCase().includes(q) ||
-        v.title.toLowerCase().includes(q) ||
-        v.organization.toLowerCase().includes(q) ||
-        formatLocation(v.city, v.country).toLowerCase().includes(q) ||
-        (v.topics ?? '').toLowerCase().includes(q) ||
-        String(v.year).includes(q)
-      )
-    })
-  }, [query, venues])
+    const results = q
+      ? venues.filter((v) => {
+        return (
+          (v.acronym ?? '').toLowerCase().includes(q) ||
+          v.title.toLowerCase().includes(q) ||
+          v.organization.toLowerCase().includes(q) ||
+          formatLocation(v.city, v.country).toLowerCase().includes(q) ||
+          (v.topics ?? '').toLowerCase().includes(q) ||
+          String(v.year).includes(q)
+        )
+      })
+      : [...venues]
+    if (recScores.size > 0) {
+      results.sort((a,b) => {
+        const scoreA = recScores.get(`${a.seriesId}-${a.year}`) ?? 0
+        const scoreB = recScores.get(`${b.seriesId}-${b.year}`) ?? 0
+        return scoreB - scoreA
+      })
+    }
+    return results
+  }, [query, venues, recScores])
 
   return (
       <main className="main">
