@@ -20,22 +20,25 @@ export default function NavBar() {
               end
               className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
             >Find Venues</NavLink>
-            <NavLink
-              to='/collections'
-              end
-              className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
-            >My Collections</NavLink>
             {ready && currentUser?.role === 'admin' ? (
               <NavLink
                 to='/admin'
                 className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
               >Admin Dashboard</NavLink>
             ) : null}
-            {ready && currentUser ? (
+            {ready && currentUser?.role === 'researcher' ? (
               <NavLink
-                to='/profile'
+                to='/collections'
                 className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
-              >Profile</NavLink>
+              >My Collections</NavLink>
+            ) : null}
+            {ready && currentUser ? (
+              <>
+                <NavLink
+                  to='/profile'
+                  className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
+                >Profile</NavLink>
+              </>
             ) : (
               <>
                 <NavLink
