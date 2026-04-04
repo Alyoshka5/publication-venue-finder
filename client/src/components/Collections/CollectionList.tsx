@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import style from './CollectionList.module.css';
 import type { Collection } from '../../models/collections';
 import { formatDate } from '../../helpers/formatting';
@@ -17,6 +17,7 @@ export default function CollectionList() {
   const { currentUser } = useAuth();
 
   useEffect(() => {
+    if (!currentUser) return;
     const controller = new AbortController()
 
     const getUserCollections = async () => {
@@ -37,7 +38,7 @@ export default function CollectionList() {
 
     getUserCollections()
     return () => controller.abort()
-  }, [])
+  }, [currentUser])
 
   const createNewCollection = async () => {
     if (newCollectionName.trim() === '') return;
