@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import type { UpcomingStats } from '../../models/admin'
+import { useAuth } from '../Auth/useAuth'
 import style from './AdminDashboard.module.css'
 
 const emptyStats: UpcomingStats = {
@@ -8,11 +10,16 @@ const emptyStats: UpcomingStats = {
 }
 
 export default function AdminDashboard() {
+  const { currentUser } = useAuth()
   const [stats, setStats] = useState<UpcomingStats>(emptyStats)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  const canViewAdmin = currentUser?.role === 'admin'
+
   useEffect(() => {
+    if (!canViewAdmin) return
+
     const controller = new AbortController()
 
     const run = async () => {
@@ -33,7 +40,27 @@ export default function AdminDashboard() {
 
     run()
     return () => controller.abort()
-  }, [])
+  }, [canViewAdmin])
+
+  if (!canViewAdmin) {
+    return (
+      <main className="main">
+        <section className={style.header}>
+          <div className={style.headerContent}>
+            <p className={style.eyebrow}>Admin Dashboard</p>
+            <h1 className={style.title}>Admin Access Required</h1>
+            <p className={style.subtitle}>
+              Sign in with an admin account to view the aggregate posting metrics.
+            </p>
+            <p className={style.authLinks}>
+              <Link to="/">Find Venues</Link>
+              <Link to="/login">Log In</Link>
+            </p>
+          </div>
+        </section>
+      </main>
+    )
+  }
 
   return (
     <main className="main">

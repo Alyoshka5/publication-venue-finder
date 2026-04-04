@@ -1,0 +1,129 @@
+.shell {
+  display: grid;
+  gap: 18px;
+}
+
+.header {
+  padding: 28px 32px 20px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-2);
+  text-align: left;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.title {
+  margin: 8px 0 10px;
+  font-size: 30px;
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  color: var(--text);
+}
+
+.emptyCard,
+.profileCard {
+  padding: 22px 24px;
+  text-align: left;
+}
+
+.emptyText {
+  margin-top: 10px;
+  max-width: 640px;
+}
+
+.emptyActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.actionLink,
+.actionLinkSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 10px 14px;
+  text-decoration: none;
+}
+
+.actionLink {
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  color: white;
+}
+
+.actionLinkSecondary {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 92%, transparent);
+  color: var(--text-h);
+}
+
+.profileTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.profileName {
+  font-size: 28px;
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+.profileEmail {
+  margin-top: 6px;
+}
+
+.roleBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(124, 58, 237, 0.28);
+  background: color-mix(in srgb, var(--accent-bg) 85%, transparent);
+  color: var(--text-h);
+  font-family: var(--mono);
+  text-transform: capitalize;
+}
+
+.details {
+  margin: 22px 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.details div {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 92%, transparent);
+}
+
+.details dt {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.details dd {
+  margin: 8px 0 0;
+  color: var(--text-h);
+  font-weight: 500;
+}

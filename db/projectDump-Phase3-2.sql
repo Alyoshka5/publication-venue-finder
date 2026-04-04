@@ -38,13 +38,13 @@ INSERT INTO `ORGANIZATION` (`Name`, `Website`, `Society`, `Publisher`, `Universi
 ('ISOC', 'https://www.internetsociety.org', 'Internet Society', NULL, NULL),
 ('IACR', 'https://www.iacr.org', 'IACR', 'IACR', NULL),
 ('IFIP', 'https://www.ifip.org', 'IFIP', NULL, NULL),
-( 'ACL', 'https://www.aclweb.org', 'ACL', 'ACL Anthology', NULL),
-( 'ISCA', 'https://www.isca-speech.org', 'International Speech Communication Association', NULL, NULL),
-( 'APS', 'https://www.psychologicalscience.org', 'Association for Psychological Science', NULL, NULL),
-( 'Cognitive Science Society', 'https://cognitivesciencesociety.org', 'Cognitive Science Society', NULL, NULL),
-( 'Cognitive Neuroscience Society', 'https://www.cogneurosociety.org', 'Cognitive Neuroscience Society', NULL, NULL),
-( 'Nature Portfolio', 'https://www.nature.com', NULL, 'Springer Nature', NULL),
-( 'MIT Press', 'https://mitpress.mit.edu', NULL, 'MIT Press', NULL);
+('ACL', 'https://www.aclweb.org', 'ACL', 'ACL Anthology', NULL),
+('ISCA', 'https://www.isca-speech.org', 'International Speech Communication Association', NULL, NULL),
+('APS', 'https://www.psychologicalscience.org', 'Association for Psychological Science', NULL, NULL),
+('Cognitive Science Society', 'https://cognitivesciencesociety.org', 'Cognitive Science Society', NULL, NULL),
+('Cognitive Neuroscience Society', 'https://www.cogneurosociety.org', 'Cognitive Neuroscience Society', NULL, NULL),
+('Nature Portfolio', 'https://www.nature.com', NULL, 'Springer Nature', NULL),
+('MIT Press', 'https://mitpress.mit.edu', NULL, 'MIT Press', NULL);
 
 -- --------------------------------------------------------
 
@@ -755,12 +755,12 @@ CREATE TABLE COLLECTION (
 -- Dumping data for table `COLLECTION`
 --
 
-INSERT INTO `COLLECTION` (`CreatorUserID`, `Name`, `CreatedAt`) VALUES
-(1, 'My ML Conferences', '2024-09-05 10:00:00'),
-(3, 'NLP Reading List', '2024-09-10 11:00:00'),
-(9, 'CogSci & Neuro', '2024-09-15 09:00:00'),
-(16, 'Affect & HRI Venues', '2024-09-20 08:00:00'),
-(7, 'Vision Conferences', '2024-10-01 10:00:00');
+INSERT INTO `COLLECTION` (`CollectionID`, `CreatorUserID`, `Name`, `CreatedAt`) VALUES
+(1, 1, 'My ML Conferences', '2024-09-05 10:00:00'),
+(2, 3, 'NLP Reading List', '2024-09-10 11:00:00'),
+(3, 9, 'CogSci & Neuro', '2024-09-15 09:00:00'),
+(4, 16, 'Affect & HRI Venues', '2024-09-20 08:00:00'),
+(5, 7, 'Vision Conferences', '2024-10-01 10:00:00');
 
 -- --------------------------------------------------------
 
@@ -774,7 +774,7 @@ CREATE TABLE REQUEST (
   `ReviewedByUserID` int(8),
   `CreatedAt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `PayloadJSON` JSON,
-  `Status` varchar(50),
+  `Status` ENUM('pending','approved','rejected') NOT NULL DEFAULT 'pending',
   `RequestType` varchar(100),
   PRIMARY KEY (RequestID),
   FOREIGN KEY (SubmittedByUserID) REFERENCES ORGANIZER(UserID),
