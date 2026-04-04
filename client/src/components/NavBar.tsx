@@ -20,6 +20,11 @@ export default function NavBar() {
               end
               className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
             >Find Venues</NavLink>
+            <NavLink
+              to='/collections'
+              end
+              className={({ isActive }) => `${style.navItem} ${isActive ? style.active : ''}`}
+            >My Collections</NavLink>
             {ready && currentUser?.role === 'admin' ? (
               <NavLink
                 to='/admin'
