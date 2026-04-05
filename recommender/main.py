@@ -12,6 +12,9 @@
 
 # (1) Connect
 # Import libraries
+import os
+from pathlib import Path
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import mysql.connector
@@ -25,17 +28,37 @@ from sklearn.preprocessing import MultiLabelBinarizer
 app = Flask(__name__)
 CORS(app)
 
+ROOT = Path(__file__).resolve().parents[1]
+SERVER_ENV_PATH = ROOT / "server" / ".env"
+
+
+def read_env_value(key):
+    value = os.getenv(key)
+    if value:
+        return value
+
+    if SERVER_ENV_PATH.exists():
+        for line in SERVER_ENV_PATH.read_text().splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#") or "=" not in stripped:
+                continue
+            env_key, env_value = stripped.split("=", 1)
+            if env_key.strip() == key:
+                return env_value.strip()
+
+    return None
+
 # Exactly like mysql.createPool but a fresh connection is created for every
 # request --> we don't need to request frequently to update recommendations when 
 # a user visits the page. 
 # If we want to add a pool later we could but this should perform fine
 def get_db():
     return mysql.connector.connect(
-        host="127.0.0.1",
-        port=3306,
-        user="root",
-        password="root",
-        database="publication_venue_finder_db"
+        host=read_env_value("DB_HOST") or "127.0.0.1",
+        port=int(read_env_value("DB_PORT") or "3306"),
+        user=read_env_value("DB_USER") or "root",
+        password=read_env_value("DB_PASSWORD") or "",
+        database=read_env_value("DB_NAME") or "publication_venue_finder_db"
     )
 
 # 2. Load + set up pandas
