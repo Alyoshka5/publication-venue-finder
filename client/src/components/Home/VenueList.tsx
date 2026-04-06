@@ -1,28 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Venue } from '../../models/venues';
 import style from './VenueList.module.css';
-
-const formatDate = (value: string | null) => {
-  if (!value) return '—'
-  const d = new Date(value)
-  if (Number.isNaN(d.getTime())) return value
-  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' })
-}
-
-const formatLocation = (city: string, country: string) => {
-  if (!city && !country) return '—'
-  if (!city) return country
-  if (!country) return city
-  return `${city}, ${country}`
-}
-
-const formatTopics = (value: string | null) => {
-  if (!value) return []
-  return value
-    .split(',')
-    .map((topic) => topic.trim())
-    .filter(Boolean)
-}
+import { formatDate, formatLocation, formatTopics } from '../../helpers/formatting';
+import { useNavigate } from 'react-router-dom';
 
 export default function VenueList({
   query,
@@ -33,6 +13,7 @@ export default function VenueList({
   selectedTopicId: string
   userId: number | null
 }) {
+  const navigate = useNavigate();
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -159,7 +140,11 @@ export default function VenueList({
                   </tr>
                 ) : (
                   filteredVenues.map((v) => (
-                    <tr key={`${v.seriesId}-${v.year}`}>
+                      <tr
+                          key={`${v.seriesId}-${v.year}`}
+                          className={style.clickableRow}
+                          onClick={() => navigate(`/venue/${v.seriesId}/${v.year}`)}
+                      >
                       <td className={style.venueColumn}>
                         <div className={style.venueCell}>
                           <span className={style.venueTag}>

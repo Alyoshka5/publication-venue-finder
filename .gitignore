@@ -2,3 +2,4 @@
 **/.DS_Store
 recommender/.venv/
 recommender/__pycache__/
+.vs

@@ -170,3 +170,53 @@ export const removeVenueFromCollection = asyncHandler(async (req: Request, res: 
         });
     }
 });
+
+export const addToCollection = asyncHandler(async (req, res) => {
+    try {
+        const { userId, seriesId, year } = req.body;
+
+        if (!userId || !seriesId || !year) {
+            res.status(400).json({ error: 'Missing fields' });
+            return;
+        }
+
+        const name = 'Favorites';
+
+        const [rows]: any = await pool.query(
+            `
+            SELECT CollectionID AS collectionId
+            FROM COLLECTION
+            WHERE CreatorUserID = ? AND Name = ?
+            LIMIT 1
+            `,
+            [userId, name]
+        );
+
+        let collectionId = rows[0]?.collectionId;
+
+        if (!collectionId) {
+            const [insertResult]: any = await pool.query(
+                `
+                INSERT INTO COLLECTION (CreatorUserID, Name, CreatedAt)
+                VALUES (?, ?, NOW())
+                `,
+                [userId, name]
+            );
+
+            collectionId = insertResult.insertId;
+        }
+
+        await pool.query(
+            `
+            INSERT IGNORE INTO COLLECTION_CONTAINS (CollectionID, SeriesID, Year)
+            VALUES (?, ?, ?)
+            `,
+            [collectionId, seriesId, year]
+        );
+
+        res.json({ success: true });
+    } catch (err) {
+        console.error('COLLECTION ERROR:', err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});

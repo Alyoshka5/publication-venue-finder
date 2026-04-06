@@ -104,3 +104,58 @@ export const getTopics = asyncHandler(async (_req: Request, res: Response) => {
         });
     }
 });
+
+export const getVenueById = asyncHandler(async (req: Request, res: Response) => {
+    const seriesId = Number(req.params.seriesId ?? req.params.id);
+    const year =
+        typeof req.params.year === 'string' && req.params.year.trim() !== ''
+            ? Number(req.params.year)
+            : null;
+
+    if (!Number.isInteger(seriesId) || (year !== null && !Number.isInteger(year))) {
+        res.status(400).json({ error: 'Invalid ID' });
+        return;
+    }
+
+    const [rows]: any = await pool.query(
+        `
+        SELECT
+            vs.SeriesID AS seriesId,
+            vs.Name AS seriesName,
+            vs.Acronym AS acronym,
+            vs.Description AS description,
+
+            vi.Year AS year,
+            vi.Title AS title,
+            vi.City AS city,
+            vi.Country AS country,
+            vi.StartDate AS startDate,
+            vi.EndDate AS endDate,
+            vi.SubmissionDeadline AS submissionDeadline,
+            vi.CFP_URL AS cfpUrl,
+            vi.CallForPapers AS callForPapers,
+
+            o.Name AS organization,
+            o.Website AS website,
+            o.Society AS society,
+            o.Publisher AS publisher,
+            o.University AS university,
+
+            cs.TypicalMonth AS typicalMonth,
+            cs.Tier AS tier
+
+        FROM VENUE_SERIES vs
+        JOIN VENUE_INSTANCE vi ON vs.SeriesID = vi.SeriesID
+        JOIN ORGANIZATION o ON vs.OrgID = o.OrgID
+        LEFT JOIN CONFERENCE_SERIES cs ON cs.SeriesID = vs.SeriesID
+
+        WHERE vs.SeriesID = ?
+          AND (? IS NULL OR vi.Year = ?)
+        ORDER BY vi.Year DESC
+        LIMIT 1
+        `,
+        [seriesId, year, year]
+    );
+
+    res.json(rows[0] || null);
+});

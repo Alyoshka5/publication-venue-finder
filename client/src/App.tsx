@@ -11,6 +11,7 @@ import CollectionDetails from './components/Collections/CollectionDetails';
 import CollectionList from './components/Collections/CollectionList';
 import OrganizerSubmissionPage from './components/Organizer/OrganizerSubmissionPage';
 import AdminReviewPage from './components/Admin/AdminReviewPage';
+import VenueDetail from './components/Home/VenueDetail';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/review" element={<AdminReviewPage />} />
         <Route path="/organizer/submit" element={<OrganizerSubmissionPage />} />
+        <Route path="/venue/:seriesId/:year" element={<VenueDetail />} />
       </Routes>
     </>
   );
