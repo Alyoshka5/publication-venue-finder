@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { Venue } from '../../models/venues';
 import style from './VenueList.module.css';
 import { formatDate, formatLocation, formatTopics } from '../../helpers/formatting';
+import { useNavigate } from 'react-router-dom';
 
 export default function VenueList({
   query,
@@ -9,7 +10,8 @@ export default function VenueList({
 }: {
   query: string
   selectedTopicId: string
-}) {
+    }) {
+  const navigate = useNavigate();
   const [venues, setVenues] = useState<Venue[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -103,7 +105,11 @@ export default function VenueList({
                   </tr>
                 ) : (
                   filteredVenues.map((v) => (
-                    <tr key={`${v.seriesId}-${v.year}`}>
+                      <tr
+                          key={`${v.seriesId}-${v.year}`}
+                          className={style.clickableRow}
+                          onClick={() => navigate(`/venue/${v.seriesId}`)}
+                      >
                       <td className={style.venueColumn}>
                         <div className={style.venueCell}>
                           <span className={style.venueTag}>

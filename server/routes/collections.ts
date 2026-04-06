@@ -1,7 +1,26 @@
 import express from 'express';
 import * as collectionController from '../controllers/collectionController.ts';
+import { addToCollection } from '../controllers/collectionController.ts';
+import pool from '../database.ts';
 
 const router: express.Router = express.Router();
+
+// Add to collection
+router.post('/', addToCollection);
+
+// Check if collected
+router.get('/:userId/:seriesId/:year', async (req, res) => {
+    const { userId, seriesId, year } = req.params;
+
+    const name = `${seriesId}-${year}`;
+
+    const [rows] = await pool.query(
+        `SELECT * FROM COLLECTION WHERE CreatorUserID=? AND Name=?`,
+        [userId, name]
+    );
+
+    res.json({ collected: Array.isArray(rows) && rows.length > 0 });
+});
 
 router.get('/user/:userId', collectionController.getCollections);
 

@@ -170,3 +170,36 @@ export const removeVenueFromCollection = asyncHandler(async (req: Request, res: 
         });
     }
 });
+
+export const addToCollection = asyncHandler(async (req, res) => {
+    try {
+        const { userId, seriesId, year } = req.body;
+
+        if (!userId || !seriesId || !year) {
+            res.status(400).json({ error: 'Missing fields' });
+            return;
+        }
+
+        const name = `${seriesId}-${year}`;
+
+        // Generate CollectionID manually
+        const [rows]: any = await pool.query(
+            `SELECT MAX(CollectionID) as maxId FROM COLLECTION`
+        );
+
+        const nextId = (rows[0]?.maxId || 0) + 1;
+
+        await pool.query(
+            `
+            INSERT INTO COLLECTION (CollectionID, CreatorUserID, Name, Visibility, CreatedAt)
+            VALUES (?, ?, ?, 'Private', NOW())
+            `,
+            [nextId, userId, name]
+        );
+
+        res.json({ success: true });
+    } catch (err) {
+        console.error('COLLECTION ERROR:', err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
