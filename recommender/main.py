@@ -268,9 +268,9 @@ def build_recommendations(user_id, top_n=200):
     if venues_df.empty:
         return []
     
-    # split strings on pipe
+    # Missing topic rows arrive from pandas as NaN, so normalize them to empty lists.
     venues_df['topic_list'] = venues_df['topics'].apply(
-        lambda x: x.split('|') if x else []
+        lambda x: x.split('|') if isinstance(x, str) and x else []
     )
     
     # Matrix construction:
@@ -366,15 +366,16 @@ def build_recommendations(user_id, top_n=200):
     #
     
     
-    # dictionary: 
+    # Pandas can carry NaN through to the final rows; normalize those values so
+    # Flask returns valid JSON that the Node proxy can parse.
     return [
         {
             'seriesId': int(row['SeriesID']),
             'year': int(row['Year']),
-            'acronym': row['Acronym'],
-            'title': row['SeriesName'],
+            'acronym': None if pd.isna(row['Acronym']) else row['Acronym'],
+            'title': None if pd.isna(row['SeriesName']) else row['SeriesName'],
             'score': round(float(row['rec_score']), 4),
-            'topics': row['topics']
+            'topics': None if pd.isna(row['topics']) else row['topics']
         }
         for _, row in top_venues.iterrows()
     ]
