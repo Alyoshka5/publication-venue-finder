@@ -1697,3 +1697,35 @@ INSERT INTO `VIEWS` (`UserID`, `SeriesID`, `Year`, `ViewedTimestamp`, `DurationS
 INSERT INTO `BOOKMARKS` (`UserID`, `SeriesID`, `Year`, `BookmarkedTimestamp`) VALUES
 (13, 39, 2026, '2025-02-15 09:30:00'),
 (13, 39, 2027, '2026-02-15 09:30:00');
+
+-- ============================================================
+-- TRIGGERS
+-- ============================================================
+DELIMITER //
+CREATE TRIGGER add_bookmark_to_bookmarks_collection
+AFTER INSERT ON BOOKMARKS
+FOR EACH ROW
+BEGIN
+	IF NOT EXISTS (SELECT * FROM COLLECTION WHERE Name = "Bookmarks" AND CreatorUserID = NEW.UserID) THEN
+		INSERT INTO COLLECTION (CreatorUserID, Name) VALUES (NEW.UserID, "Bookmarks");
+	END IF;
+    
+  INSERT INTO COLLECTION_CONTAINS VALUES (
+    (SELECT CollectionID FROM COLLECTION WHERE Name = "Bookmarks" AND CreatorUserID = NEW.UserID LIMIT 1),
+    NEW.SeriesID,
+    NEW.Year
+	);
+END //
+
+DELIMITER //
+CREATE TRIGGER remove_bookmark_from_bookmarks_collection
+AFTER DELETE ON BOOKMARKS
+FOR EACH ROW
+BEGIN
+	IF EXISTS (SELECT * FROM COLLECTION WHERE Name = "Bookmarks" AND CreatorUserID = OLD.UserID) THEN
+		DELETE FROM COLLECTION_CONTAINS WHERE 
+			CollectionID = (SELECT CollectionID FROM COLLECTION WHERE Name = "Bookmarks" AND CreatorUserID = OLD.UserID LIMIT 1)
+			AND SeriesID = OLD.SeriesID
+			AND Year = OLD.Year;
+	END IF;
+END //
