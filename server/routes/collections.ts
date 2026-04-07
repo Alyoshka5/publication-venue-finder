@@ -12,18 +12,19 @@ router.post('/', addToCollection);
 router.get('/:userId/:seriesId/:year', async (req, res) => {
     const { userId, seriesId, year } = req.params;
 
-    const [rows] = await pool.query(
+    const [rows]: any = await pool.query(
         `
-        SELECT 1
+        SELECT cc.CollectionID AS collectionId
         FROM COLLECTION c
         JOIN COLLECTION_CONTAINS cc ON cc.CollectionID = c.CollectionID
-        WHERE c.CreatorUserID = ? AND cc.SeriesID = ? AND cc.Year = ?
-        LIMIT 1
+        WHERE c.CreatorUserID = ? 
+          AND cc.SeriesID = ? 
+          AND cc.Year = ?
         `,
         [userId, seriesId, year]
     );
 
-    res.json({ collected: Array.isArray(rows) && rows.length > 0 });
+    res.json(rows.map((r: any) => r.collectionId));
 });
 
 router.get('/user/:userId', collectionController.getCollections);

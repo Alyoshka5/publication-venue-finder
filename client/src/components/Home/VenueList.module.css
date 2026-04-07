@@ -38,3 +38,11 @@
   font-size: 12px;
   line-height: 1.2;
 }
+
+.clickableRow {
+    cursor: pointer;
+}
+
+.clickableRow:hover {
+    background-color: #f5f5f5;
+}
