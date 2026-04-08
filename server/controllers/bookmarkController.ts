@@ -20,3 +20,14 @@ export const addBookmark = asyncHandler(async (req: Request, res: Response) => {
 
     res.json({ success: true });
 });
+
+export const removeBookmark = asyncHandler(async (req: Request, res: Response) => {
+    const { userId, seriesId, year } = req.body;
+
+    await pool.query(
+        `DELETE FROM BOOKMARKS WHERE UserID = ? AND SeriesID = ? AND Year = ?`,
+        [userId, seriesId, year]
+    );
+
+    res.json({ success: true });
+});

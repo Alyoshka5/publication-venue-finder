@@ -247,8 +247,14 @@ export default function CollectionDetails() {
                           onClick={() => navigate(`/venue/${v.seriesId}/${v.year}`)}
                       >
                       <td className={style.removeVenueButtonCell}>
-                        <button className={style.modificationButton} onClick={() => removeVenueFromCollection(v.seriesId, v.year)}>
-                          <Icon path={mdiMinusCircleOutline} size={1}/>
+                         <button
+                          className={style.modificationButton}
+                            onClick={(e) => {
+                               e.stopPropagation(); // this prevents the onClick from going to venue details page
+                               removeVenueFromCollection(v.seriesId, v.year);
+                            }}
+                         >
+                          <Icon path={mdiMinusCircleOutline} size={1} />
                         </button>
                       </td>
                       <td>
