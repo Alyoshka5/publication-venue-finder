@@ -152,12 +152,6 @@ export const updateCollection = asyncHandler(async (req: Request, res: Response)
 
 export const deleteCollection = asyncHandler(async (req: Request, res: Response) => {
     try {
-         await pool.query(
-            `DELETE
-            FROM COLLECTION_CONTAINS
-            WHERE CollectionID = ?`,
-            [req.params.id]
-        );
         const [result] = await pool.query(
             `DELETE
             FROM COLLECTION
