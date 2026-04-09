@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Icon } from '@mdi/react';
 import { mdiPlus } from '@mdi/js';
 import { useAuth } from '../Auth/useAuth';
+import type { SeriesOption } from '../../models/venues';
 
 export default function CollectionList() {
   const [collections, setCollections] = useState<Collection[]>([])
@@ -15,16 +16,20 @@ export default function CollectionList() {
   const [newCollectionName, setNewCollectionName] = useState<string>('');
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+  const [selectedSeriesId, setSelectedSeriesId] = useState<string>('');
+  const [seriesList, setSeriesList] = useState<SeriesOption[]>([]);
 
   useEffect(() => {
-    if (!currentUser) return;
     const controller = new AbortController()
 
     const getUserCollections = async () => {
       try {
         setLoading(true)
         setError(null)
-        const res = await fetch(`/api/collections/user/${currentUser?.userId}`, { signal: controller.signal })
+        const params = new URLSearchParams()
+        if (selectedSeriesId) params.set('seriesId', selectedSeriesId)
+        const suffix = params.toString()
+        const res = await fetch(`/api/collections/user/${currentUser?.userId}/list${suffix ? `?${suffix}` : ''}`, { signal: controller.signal })
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`)
         const data = (await res.json()) as Collection[]
         setCollections(Array.isArray(data) ? data : [])
@@ -38,7 +43,7 @@ export default function CollectionList() {
 
     getUserCollections()
     return () => controller.abort()
-  }, [currentUser])
+  }, [currentUser, selectedSeriesId])
 
   const createNewCollection = async () => {
     if (newCollectionName.trim() === '') return;
@@ -76,11 +81,45 @@ export default function CollectionList() {
       }
   }
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const getSeries = async () => {
+      try {
+        const res = await fetch('/api/venues/series', { signal: controller.signal });
+        if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
+        const data = (await res.json()) as SeriesOption[];
+        setSeriesList(Array.isArray(data) ? data : []);
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
+        console.error('Failed to load topics', error);
+      }
+    };
+
+    getSeries();
+    return () => controller.abort();
+  }, []);
+
   return (
       <main className="main">
       <section className={`card ${style.contentContainer}`}>
         <div className="cardHeader">
           <h2>My Collections</h2>
+          <label className={style.filter}>
+            <span className={style.srOnly}>Series</span>
+            <p className={style.seriesFilterHeader}>Find complete collections for: </p>
+            <select
+              value={selectedSeriesId}
+              onChange={(e) => setSelectedSeriesId(e.target.value)}
+            >
+              <option value="">Show All Collections</option>
+              {seriesList.map((series) => (
+                <option key={series.seriesId} value={String(series.seriesId)}>
+                  {series.acronym}
+                </option>
+              ))}
+            </select>
+          </label>
           <div>
             <button className={`pill ${style.primaryButton} ${openCollectionForm ? 'hidden' : ''}`} onClick={() => setOpenCollectionForm(true)}>
               <Icon path={mdiPlus} size={0.75} /> New Collection

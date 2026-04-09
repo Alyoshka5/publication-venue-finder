@@ -19,7 +19,7 @@ export default function HomePage() {
 
     const run = async () => {
       try {
-        const res = await fetch('/api/venues/topics', { signal: controller.signal });
+        const res = await fetch('/api/venues/series', { signal: controller.signal });
         if (!res.ok) throw new Error(`API error: ${res.status} ${res.statusText}`);
         const data = (await res.json()) as TopicOption[];
         setTopics(Array.isArray(data) ? data : []);

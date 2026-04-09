@@ -15,4 +15,9 @@ type TopicOption = {
   name: string
 }
 
-export type { Venue, TopicOption }
+type SeriesOption = {
+  seriesId: number
+  acronym: string
+}
+
+export type { Venue, TopicOption, SeriesOption }

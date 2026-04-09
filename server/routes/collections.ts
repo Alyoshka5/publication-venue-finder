@@ -8,7 +8,21 @@ const router: express.Router = express.Router();
 // Add to collection
 router.post('/', addToCollection);
 
-// Check if collected
+router.get('/user/:userId/list', collectionController.getCollections);
+
+router.post('/user/:userId', collectionController.createCollection);
+
+router.get('/:id', collectionController.getCollectionInfo);
+
+router.put('/:id', collectionController.updateCollection);
+
+router.delete('/:id', collectionController.deleteCollection);
+
+router.get('/:id/venues', collectionController.getCollectionVenues);
+
+router.delete('/:id/venues', collectionController.removeVenueFromCollection);
+
+// // Check if collected
 router.get('/:userId/:seriesId/:year', async (req, res) => {
     const { userId, seriesId, year } = req.params;
 
@@ -26,19 +40,5 @@ router.get('/:userId/:seriesId/:year', async (req, res) => {
 
     res.json(rows.map((r: any) => r.collectionId));
 });
-
-router.get('/user/:userId', collectionController.getCollections);
-
-router.post('/user/:userId', collectionController.createCollection);
-
-router.get('/:id', collectionController.getCollectionInfo);
-
-router.put('/:id', collectionController.updateCollection);
-
-router.delete('/:id', collectionController.deleteCollection);
-
-router.get('/:id/venues', collectionController.getCollectionVenues);
-
-router.delete('/:id/venues', collectionController.removeVenueFromCollection);
 
 export default router;
