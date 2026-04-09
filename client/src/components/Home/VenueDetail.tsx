@@ -70,7 +70,7 @@ export default function VenueDetail() {
 
         const fetchCollections = async () => {
             try {
-                const res = await fetch(`/api/collections/user/${userId}`);
+                const res = await fetch(`/api/collections/user/${userId}/list`);
                 if (!res.ok) throw new Error('Failed to fetch collections');
                 const data = await res.json();
                 setCollections(Array.isArray(data) ? data : []);
