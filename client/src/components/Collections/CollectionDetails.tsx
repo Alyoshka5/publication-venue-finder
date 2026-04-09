@@ -241,10 +241,20 @@ export default function CollectionDetails() {
                   </tr>
                 ) : (
                   venues.map((v) => (
-                    <tr key={`${v.seriesId}-${v.year}`} className={style.venueRow}>
+                      <tr
+                          key={`${v.seriesId}-${v.year}`}
+                          className={style.venueRow}
+                          onClick={() => navigate(`/venue/${v.seriesId}/${v.year}`)}
+                      >
                       <td className={style.removeVenueButtonCell}>
-                        <button className={style.modificationButton} onClick={() => removeVenueFromCollection(v.seriesId, v.year)}>
-                          <Icon path={mdiMinusCircleOutline} size={1}/>
+                         <button
+                          className={style.modificationButton}
+                            onClick={(e) => {
+                               e.stopPropagation(); // this prevents the onClick from going to venue details page
+                               removeVenueFromCollection(v.seriesId, v.year);
+                            }}
+                         >
+                          <Icon path={mdiMinusCircleOutline} size={1} />
                         </button>
                       </td>
                       <td>
