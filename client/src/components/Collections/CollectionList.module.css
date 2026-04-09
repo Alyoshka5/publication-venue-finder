@@ -1,3 +1,42 @@
+.filter {
+  display: flex;
+
+  @media (max-width: 1024px) {
+    flex: 1 1 auto;
+  }
+}
+
+.filter select {
+  width: 100%;
+  min-width: 180px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 92%, transparent);
+  color: var(--text-h);
+  outline: none;
+
+  &:focus-visible {
+    border-color: var(--accent-border);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-bg) 80%, transparent);
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.seriesFilterHeader {
+  font-size: 0.9em;
+}
+
 .collectionForm {
     display: flex;
     gap: 5px;

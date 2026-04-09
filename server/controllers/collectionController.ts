@@ -4,6 +4,16 @@ import type { Request, Response } from 'express';
 
 export const getCollections = asyncHandler(async (req: Request, res: Response) => {
     try {
+        const seriesId =
+            typeof req.query.seriesId === 'string' && req.query.seriesId.trim() !== ''
+                ? Number(req.query.seriesId)
+                : null;
+
+        if (seriesId !== null && !Number.isInteger(seriesId)) {
+            res.status(400).json({ error: 'topicId must be an integer' });
+            return;
+        }
+
         const [rows] = await pool.query(
             `
             SELECT 
@@ -15,10 +25,21 @@ export const getCollections = asyncHandler(async (req: Request, res: Response) =
             FROM COLLECTION c
             LEFT JOIN COLLECTION_CONTAINS cc ON cc.CollectionID = c.CollectionID
             WHERE creatorUserId = ?
+            AND (? IS NULL OR NOT EXISTS (
+                SELECT * FROM VENUE_INSTANCE vi
+                WHERE vi.Reviewing = FALSE AND vi.Published = FALSE AND
+                SeriesID = ?
+                AND NOT EXISTS (
+                    SELECT * FROM COLLECTION_CONTAINS
+                    WHERE SeriesID = vi.SeriesID
+                    AND Year = vi.Year
+                    AND CollectionID = c.CollectionID
+                )
+            ))
             GROUP BY c.CollectionID, c.CreatorUserID, c.Name, c.CreatedAt
             ORDER BY createdAt DESC
             `,
-            [req.params.userId]
+            [req.params.userId, seriesId, seriesId]
         );
         res.json(rows);
     } catch (err) {

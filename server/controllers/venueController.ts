@@ -105,6 +105,25 @@ export const getTopics = asyncHandler(async (_req: Request, res: Response) => {
     }
 });
 
+export const getSeries = asyncHandler(async (_req: Request, res: Response) => {
+    try {
+        const [rows] = await pool.query(
+            `
+            SELECT SeriesID AS seriesId, Acronym AS acronym
+            FROM VENUE_SERIES
+            ORDER BY acronym ASC
+            `
+        );
+
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({
+            error: 'query failed',
+            details: err instanceof Error ? err.message : String(err)
+        });
+    }
+});
+
 export const getVenueById = asyncHandler(async (req: Request, res: Response) => {
     const seriesId = Number(req.params.seriesId ?? req.params.id);
     const year =
