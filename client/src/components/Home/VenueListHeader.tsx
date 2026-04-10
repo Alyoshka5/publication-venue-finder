@@ -20,7 +20,7 @@ export default function VenueListHeader({
         <header className={style.header}>
         <div className={style.brand}>
           <div className={style.mark} aria-hidden="true">
-            PVF
+            <img src="/pvf-mark-v2.svg" alt="" className={style.markSvg} />
           </div>
           <div className={style.brandText}>
             <h1>Publication Venue Finder</h1>
